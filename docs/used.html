@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二手车对比 - 预算年份里程筛选 + 两两对比 - 买车指南</title>
+    <meta name="description" content="二手车选购平台：按预算、年份、里程筛选二手车源，查看参考价与保值率，支持任选两台车两两对比，买二手车更放心。">
+    <meta name="keywords" content="二手车对比,二手车推荐,保值率,二手车参考价">
+    <!-- Google AdSense 脚本 -->
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', sans-serif; background-color: #f5f5f5; color: #333; }
+        .navbar { background-color: #333; overflow: hidden; }
+        .navbar a { float: left; display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none; }
+        .navbar a:hover { background-color: #ddd; color: black; }
+        .navbar a.active { background-color: #3498db; color: #fff; }
+        .content { padding: 20px; max-width: 1100px; margin: 0 auto; }
+        h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; margin-bottom: 20px; }
+        .filters { display: flex; flex-wrap: wrap; gap: 15px; align-items: center; background: #fff; padding: 18px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-bottom: 25px; }
+        .filters label { font-weight: bold; color: #555; }
+        .filters select { padding: 9px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; min-width: 150px; }
+        .car-list { display: flex; flex-wrap: wrap; gap: 20px; }
+        .used-card { width: 320px; background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding: 18px; transition: transform 0.2s; position: relative; }
+        .used-card:hover { transform: translateY(-4px); }
+        .used-card.selected { outline: 3px solid #3498db; }
+        .used-card h3 { color: #2c3e50; margin-bottom: 8px; }
+        .used-price { color: #e74c3c; font-size: 1.3rem; font-weight: bold; }
+        .used-meta { color: #7f8c8d; font-size: 0.85rem; margin: 8px 0; line-height: 1.8; }
+        .retention { display: inline-block; background: #eaf4fd; color: #2980b9; border-radius: 4px; padding: 2px 8px; font-size: 0.78rem; }
+        .compare-btn {
+            display: inline-block;
+            margin-top: 10px;
+            background: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 14px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+        .compare-btn:hover { background: #2980b9; }
+        .compare-panel {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2c3e50;
+            color: #fff;
+            border-radius: 30px;
+            padding: 12px 24px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+            display: none;
+            align-items: center;
+            gap: 15px;
+            z-index: 100;
+        }
+        .compare-panel button { border: none; border-radius: 20px; padding: 8px 18px; cursor: pointer; font-size: 0.85rem; font-weight: bold; }
+        .do-compare { background: #e74c3c; color: #fff; }
+        .clear-compare { background: #7f8c8d; color: #fff; }
+        #compare-result { background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); overflow-x: auto; margin-top: 25px; display: none; }
+        table { width: 100%; border-collapse: collapse; min-width: 500px; }
+        th, td { padding: 12px 15px; text-align: center; border-bottom: 1px solid #eee; font-size: 0.9rem; }
+        th { background: #2c3e50; color: #fff; }
+        td:first-child { background: #f8f9fa; font-weight: bold; color: #2c3e50; width: 120px; text-align: left; }
+        .ads-container { margin: 20px auto; max-width: 1100px; padding: 10px; text-align: center; background: #fff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .tip { background: #fff7e6; border-left: 4px solid #f39c12; padding: 12px 15px; border-radius: 5px; color: #555; font-size: 0.88rem; margin-top: 20px; line-height: 1.7; }
+        footer { margin-top: 40px; background: #333; color: #ccc; text-align: center; padding: 25px 20px; font-size: 0.85rem; line-height: 1.8; }
+        footer a { color: #9eccef; text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+    </style>
+<style>.self-ad{background:linear-gradient(135deg,#eaf4fd,#f0f7fd);border:1px solid #bfe0f7;}.self-ad-link{display:flex;align-items:center;gap:16px;text-decoration:none;color:#333;padding:6px;}.self-ad-icon{font-size:2rem;}.self-ad-text{flex:1;text-align:left;}.self-ad-title{font-weight:bold;color:#2c3e50;font-size:1rem;}.self-ad-desc{color:#7f8c8d;font-size:.85rem;margin-top:2px;}.self-ad-cta{background:#3498db;color:#fff;padding:8px 16px;border-radius:20px;font-size:.85rem;white-space:nowrap;}@media(max-width:600px){.self-ad-link{flex-wrap:wrap;}.self-ad-cta{margin-top:6px;}}</style></head>
+<body>
+    <div class="navbar">
+        <a href="index.html">首页</a>
+        <a href="index.html#ranking">新车排行</a>
+        <a href="compare.html">新车对比</a>
+        <a href="price.html">落地价</a>
+        <a href="cost.html">养车成本</a>
+        <a href="used.html" class="active">二手车</a>
+        <a href="used-10w.html">10万推荐</a>
+        <a href="deals.html">降价行情</a>
+        <a href="library.html">车型库</a>
+        <a href="news.html">资讯</a>
+        <a href="model.html">展厅</a>
+        <a href="power.html">油电成本</a>
+    </div>
+
+    <div class="content">
+        <h1>二手车对比选购</h1>
+        <div class="filters">
+            <div><label>预算：</label>
+                <select id="filter-budget">
+                    <option value="0">不限</option>
+                    <option value="10">10万以内</option>
+                    <option value="20">20万以内</option>
+                    <option value="50">20-50万</option>
+                </select>
+            </div>
+            <div><label>年份：</label>
+                <select id="filter-year">
+                    <option value="0">不限</option>
+                    <option value="2022">2022年及以后</option>
+                    <option value="2019">2019年以后</option>
+                    <option value="2015">2015年以后</option>
+                </select>
+            </div>
+            <div><label>里程：</label>
+                <select id="filter-mileage">
+                    <option value="0">不限</option>
+                    <option value="3">3万公里以内</option>
+                    <option value="8">8万公里以内</option>
+                    <option value="15">15万公里以内</option>
+                </select>
+            </div>
+            <div style="color:#7f8c8d;font-size:0.85rem;">勾选 2 台车可对比参数</div>
+        </div>
+
+        <div class="car-list" id="used-list"></div>
+
+        <div id="compare-result"></div>
+
+        <div class="tip">
+            <strong>选购提醒：</strong>购买二手车请务必核验车辆登记证、行驶证与维保记录，建议带第三方检测报告成交；保值率数据为市场参考估算，实际价格以车况为准。
+        </div>
+
+        <!-- 广告位 -->
+        <div class="ads-container self-ad"><a href="compare.html" class="self-ad-link"><span class="self-ad-icon">&#9878;</span><div class="self-ad-text"><div class="self-ad-title">两款新车参数对比</div><div class="self-ad-desc">价格、尺寸、动力、油耗横向比拼</div></div><span class="self-ad-cta">查看 &rarr;</span></a></div>
+    </div>
+
+    <div class="compare-panel" id="compare-panel">
+        <span id="compare-panel-text">已选 0 台</span>
+        <button class="do-compare" id="do-compare">开始对比</button>
+        <button class="clear-compare" id="clear-compare">清空</button>
+    </div>
+
+    <footer>
+        <p><a href="about.html">关于我们</a> | <a href="contact.html">联系我们</a> | <a href="privacy.html">隐私政策</a> | <a href="stats.html">流量统计</a></p>
+        <p>买车指南 &copy; 2026 | 二手车价格为市场参考价，实际成交以车况为准</p>
+    </footer>
+
+    <script>
+        const usedCars = [
+            { name: "丰田凯美瑞", year: 2021, mileage: 4.5, price: 13.8, retention: "78%", desc: "2.0G 豪华版，白色，一手车，全程4S保养" },
+            { name: "本田雅阁", year: 2020, mileage: 5.8, price: 12.5, retention: "75%", desc: "锐·混动 2.0L 锐领版，原版原漆" },
+            { name: "大众迈腾", year: 2019, mileage: 7.2, price: 10.9, retention: "68%", desc: "380TSI 尊贵版，黑色，无事故" },
+            { name: "日产天籁", year: 2021, mileage: 3.8, price: 11.6, retention: "70%", desc: "2.0L XL 舒适版，座椅如新" },
+            { name: "吉利星越L", year: 2022, mileage: 2.6, price: 11.9, retention: "82%", desc: "2.0TD 四驱旗舰，8AT，性价比之选" },
+            { name: "比亚迪汉EV", year: 2022, mileage: 3.2, price: 16.5, retention: "80%", desc: "超长续航版，电池健康度高" },
+            { name: "特斯拉Model 3", year: 2021, mileage: 5.0, price: 15.9, retention: "72%", desc: "标准续航后驱，白外黑内" },
+            { name: "理想ONE", year: 2020, mileage: 6.5, price: 15.8, retention: "66%", desc: "增程6座，家用奶爸车" },
+            { name: "宝马3系", year: 2019, mileage: 6.8, price: 17.9, retention: "71%", desc: "325Li M运动套装，蓝色" },
+            { name: "奔驰C级", year: 2018, mileage: 8.5, price: 16.8, retention: "63%", desc: "C 200 L 运动版，配置高" },
+            { name: "奥迪A4L", year: 2019, mileage: 6.0, price: 15.5, retention: "69%", desc: "40 TFSI 时尚型，白色" },
+            { name: "哈弗H6", year: 2021, mileage: 3.5, price: 7.9, retention: "65%", desc: "第三代 1.5T 两驱Max，销量王" },
+            { name: "长安CS75 PLUS", year: 2022, mileage: 2.2, price: 8.6, retention: "74%", desc: "1.5T 尊贵型，准新车况" },
+            { name: "本田飞度", year: 2020, mileage: 4.0, price: 6.5, retention: "85%", desc: "1.5L CVT舒适版，保值神器" },
+            { name: "大众高尔夫", year: 2019, mileage: 5.5, price: 9.2, retention: "70%", desc: "280TSI R-Line，德系小钢炮" },
+            { name: "马自达昂克赛拉", year: 2021, mileage: 3.0, price: 8.9, retention: "72%", desc: "2.0L 自动质雅版，魂动红" }
+        ];
+
+        let selected = [];
+
+        function render() {
+            const budget = parseInt(document.getElementById('filter-budget').value);
+            const year = parseInt(document.getElementById('filter-year').value);
+            const mileage = parseInt(document.getElementById('filter-mileage').value);
+            const list = document.getElementById('used-list');
+            list.innerHTML = '';
+            usedCars.filter(c => (budget === 0 || c.price <= budget)
+                    && (year === 0 || c.year >= year)
+                    && (mileage === 0 || c.mileage <= mileage))
+                .forEach((car, idx) => {
+                    const card = document.createElement('div');
+                    card.classList.add('used-card');
+                    if (selected.includes(idx)) card.classList.add('selected');
+                    card.innerHTML = `
+                        <h3>${car.name}</h3>
+                        <div class="used-price">${car.price} 万</div>
+                        <div class="used-meta">${car.year}年上牌 | ${car.mileage}万公里<br>${car.desc}</div>
+                        <span class="retention">保值率 ${car.retention}</span><br>
+                        <button class="compare-btn" data-idx="${idx}">${selected.includes(idx) ? '取消对比' : '加入对比'}</button>
+                    `;
+                    list.appendChild(card);
+                });
+            document.querySelectorAll('.compare-btn').forEach(btn => {
+                btn.addEventListener('click', () => toggleSelect(parseInt(btn.dataset.idx)));
+            });
+            updatePanel();
+        }
+
+        function toggleSelect(idx) {
+            if (selected.includes(idx)) {
+                selected = selected.filter(i => i !== idx);
+            } else {
+                if (selected.length >= 2) selected.shift();
+                selected.push(idx);
+            }
+            render();
+        }
+
+        function updatePanel() {
+            const panel = document.getElementById('compare-panel');
+            const text = document.getElementById('compare-panel-text');
+            text.textContent = `已选 ${selected.length} 台${selected.length === 0 ? '' : '：' + selected.map(i => usedCars[i].name).join('、')}`;
+            panel.style.display = selected.length > 0 ? 'flex' : 'none';
+        }
+
+        function doCompare() {
+            const box = document.getElementById('compare-result');
+            if (selected.length < 2) {
+                alert('请选择 2 台车进行对比');
+                return;
+            }
+            const cars = selected.map(i => usedCars[i]);
+            box.style.display = 'block';
+            box.innerHTML = `
+                <h2 style="color:#2c3e50;margin-bottom:15px;">对比结果</h2>
+                <table>
+                    <thead><tr><th>项目</th>${cars.map(c => `<th>${c.name}</th>`).join('')}</tr></thead>
+                    <tbody>
+                        <tr><td>年份</td>${cars.map(c => `<td>${c.year}年</td>`).join('')}</tr>
+                        <tr><td>里程</td>${cars.map(c => `<td>${c.mileage}万公里</td>`).join('')}</tr>
+                        <tr><td>参考价</td>${cars.map(c => `<td style="color:#e74c3c;font-weight:bold;">${c.price}万</td>`).join('')}</tr>
+                        <tr><td>保值率</td>${cars.map(c => `<td>${c.retention}</td>`).join('')}</tr>
+                        <tr><td>车况说明</td>${cars.map(c => `<td style="font-size:0.82rem;">${c.desc}</td>`).join('')}</tr>
+                    </tbody>
+                </table>
+            `;
+            box.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        document.getElementById('do-compare').addEventListener('click', doCompare);
+        document.getElementById('clear-compare').addEventListener('click', () => { selected = []; render(); document.getElementById('compare-result').style.display = 'none'; });
+        ['filter-budget', 'filter-year', 'filter-mileage'].forEach(id => {
+            document.getElementById(id).addEventListener('change', render);
+        });
+        render();
+    </script>
+</body>
+</html>

@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D汽车模型展示</title>
+    <!-- Google AdSense 脚本 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            background-color: #fff;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        h1 {
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            max-width: 1400px;
+            padding: 20px;
+            gap: 20px;
+        }
+        
+        .canvas-container {
+            flex: 1;
+            min-width: 500px;
+            height: 600px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e5e5;
+            background: #2c3e50;
+        }
+        
+        .controls-panel {
+            flex-basis: 300px;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e5e5;
+        }
+        
+        .controls-panel h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .control-group {
+            margin-bottom: 25px;
+        }
+        
+        .control-group h3 {
+            color: #555;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .slider-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .slider-container label {
+            width: 120px;
+            font-size: 0.9rem;
+        }
+        
+        .slider-container input {
+            flex: 1;
+            margin: 0 15px;
+        }
+        
+        .slider-container span {
+            width: 40px;
+            text-align: center;
+            font-weight: bold;
+            color: #2980b9;
+        }
+        
+        input[type="range"] {
+            -webkit-appearance: none;
+            height: 8px;
+            background: #ddd;
+            border-radius: 4px;
+            outline: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #3498db;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb:hover {
+            background: #2980b9;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.8);
+        }
+        
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        button {
+            padding: 10px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+        
+        .instructions {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            max-width: 1400px;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .instructions h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .instructions ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .instructions li:before {
+            content: "•";
+            color: #3498db;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -5px;
+        }
+        
+        .car-info {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            gap: 15px;
+        }
+        
+        .info-card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            border-left: 4px solid #3498db;
+        }
+        
+        .info-card h4 {
+            color: #555;
+            margin-bottom: 8px;
+        }
+        
+        .ads-container {
+            margin: 20px auto;
+            max-width: 1400px;
+            width: 90%;
+            padding: 10px;
+            text-align: center;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid #e5e5e5;
+        }
+
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            width: 100%;
+            display: block;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .navbar a.active {
+            background-color: #3498db;
+            color: #fff;
+        }
+        
+        footer {
+            margin-top: 30px;
+            padding: 20px;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            width: 100%;
+            border-top: 1px solid #e5e5e5;
+            background: #fff;
+        }
+        
+        @media (max-width: 1100px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .canvas-container {
+                min-width: 90%;
+            }
+            
+            .controls-panel {
+                width: 90%;
+            }
+        }
+    </style>
+<style>.self-ad{background:linear-gradient(135deg,#eaf4fd,#f0f7fd);border:1px solid #bfe0f7;}.self-ad-link{display:flex;align-items:center;gap:16px;text-decoration:none;color:#333;padding:6px;}.self-ad-icon{font-size:2rem;}.self-ad-text{flex:1;text-align:left;}.self-ad-title{font-weight:bold;color:#2c3e50;font-size:1rem;}.self-ad-desc{color:#7f8c8d;font-size:.85rem;margin-top:2px;}.self-ad-cta{background:#3498db;color:#fff;padding:8px 16px;border-radius:20px;font-size:.85rem;white-space:nowrap;}@media(max-width:600px){.self-ad-link{flex-wrap:wrap;}.self-ad-cta{margin-top:6px;}}</style></head>
+<body>
+    <div class="navbar">
+        <a href="index.html">首页</a>
+        <a href="index.html#ranking">新车排行</a>
+        <a href="compare.html">新车对比</a>
+        <a href="price.html">落地价</a>
+        <a href="cost.html">养车成本</a>
+        <a href="used.html">二手车</a>
+        <a href="used-10w.html">10万推荐</a>
+        <a href="deals.html">降价行情</a>
+        <a href="library.html">车型库</a>
+        <a href="news.html">资讯</a>
+        <a href="model.html" class="active">展厅</a>
+        <a href="power.html">油电成本</a>
+    </div>
+    <header>
+        <h1>3D汽车模型展示</h1>
+        <p class="subtitle">您可以通过鼠标拖动旋转视图，滚轮缩放，并使用右侧控制面板调整汽车外观。</p>
+        <button class="back-button" onclick="window.history.back()">返回上一页</button>
+    </header>
+    
+    <div class="container">
+        <div class="canvas-container" id="car-container">
+            <!-- 3D场景将在这里渲染 -->
+        </div>
+        
+        <div class="controls-panel">
+            <h2>控制面板</h2>
+            
+            <div class="control-group">
+                <h3>车身颜色</h3>
+                <div class="slider-container">
+                    <label>红色</label>
+                    <input type="range" id="color-r" min="0" max="255" value="50">
+                    <span id="color-r-val">50</span>
+                </div>
+                
+                <div class="slider-container">
+                    <label>绿色</label>
+                    <input type="range" id="color-g" min="0" max="255" value="120">
+                    <span id="color-g-val">120</span>
+                </div>
+                
+                <div class="slider-container">
+                    <label>蓝色</label>
+                    <input type="range" id="color-b" min="0" max="255" value="200">
+                    <span id="color-b-val">200</span>
+                </div>
+                
+                <div class="button-group">
+                    <button id="color-reset">重置颜色</button>
+                    <button id="color-random">随机颜色</button>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <h3>车轮颜色</h3>
+                <div class="button-group">
+                    <button id="wheel-silver">银色</button>
+                    <button id="wheel-black">黑色</button>
+                    <button id="wheel-gold">金色</button>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <h3>车窗透明度</h3>
+                <div class="slider-container">
+                    <label>透明度</label>
+                    <input type="range" id="window-opacity" min="0.1" max="1" step="0.1" value="0.7">
+                    <span id="window-opacity-val">0.7</span>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <h3>视图控制</h3>
+                <div class="button-group">
+                    <button id="view-front">前视图</button>
+                    <button id="view-side">侧视图</button>
+                    <button id="view-top">俯视图</button>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <h3>动画控制</h3>
+                <div class="button-group">
+                    <button id="rotate-toggle">旋转动画</button>
+                    <button id="wheel-toggle">车轮旋转</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="instructions">
+        <h3>操作说明</h3>
+        <ul>
+            <li><strong>鼠标拖动</strong>：旋转查看汽车模型</li>
+            <li><strong>鼠标滚轮</strong>：放大或缩小视图</li>
+            <li><strong>右侧控制面板</strong>：调整汽车颜色、车窗透明度等参数</li>
+            <li><strong>视图控制按钮</strong>：快速切换到不同视角</li>
+            <li><strong>动画控制按钮</strong>：开启/关闭汽车旋转和车轮旋转动画</li>
+        </ul>
+        
+        <div class="car-info">
+            <div class="info-card">
+                <h4>车型信息</h4>
+                <p>概念跑车模型</p>
+            </div>
+            <div class="info-card">
+                <h4>技术规格</h4>
+                <p>Three.js + WebGL</p>
+            </div>
+            <div class="info-card">
+                <h4>模型组件</h4>
+                <p>车身、车轮、车窗、车灯</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 30px; border-top: 1px solid #e5e5e5; padding-top: 20px;">
+            <h3>关于 3D 汽车展示技术</h3>
+            <p style="color: #7f8c8d; font-size: 0.95rem; margin-top: 10px;">
+                本项目采用 <strong>Three.js</strong> 引擎开发，这是一个基于 WebGL 的跨浏览器 JavaScript 库。通过实时渲染，我们可以在网页上实现高性能的 3D 交互体验。
+                您看到的汽车模型由数千个多边形组成，配合物理渲染材质（PBR），可以模拟真实世界中的金属反光和玻璃透明度效果。
+            </p>
+        </div>
+    </div>
+    
+    <!-- Google 广告位 -->
+    <div class="ads-container self-ad"><a href="used.html" class="self-ad-link"><span class="self-ad-icon">&#128663;</span><div class="self-ad-text"><div class="self-ad-title">二手车对比选购</div><div class="self-ad-desc">按预算、年份、里程筛选车源</div></div><span class="self-ad-cta">查看 &rarr;</span></a></div>
+    
+    <footer>
+        <p>3D汽车模型展示 &copy; 2023 | 使用Three.js创建 | 仅供学习演示用途</p>
+    </footer>
+
+    <script>
+        // 初始化Three.js场景
+        let scene, camera, renderer, controls;
+        let carBody, frontWheels = [], rearWheels = [];
+        let isRotating = false;
+        let areWheelsRotating = false;
+        let carColor = { r: 50/255, g: 120/255, b: 200/255 };
+        let wheelColor = 0x333333;
+        let customCarModel = null; // 用于存储自定义加载的模型
+        
+        // 初始化函数
+        function init() {
+            // 创建场景
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x0a0a1a);
+            
+            // 创建相机
+            camera = new THREE.PerspectiveCamera(45, 
+                document.getElementById('car-container').clientWidth / 
+                document.getElementById('car-container').clientHeight, 
+                0.1, 1000);
+            camera.position.set(8, 5, 8);
+            
+            // 创建渲染器
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(
+                document.getElementById('car-container').clientWidth,
+                document.getElementById('car-container').clientHeight
+            );
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            
+            // 将渲染器的DOM元素添加到容器中
+            document.getElementById('car-container').appendChild(renderer.domElement);
+            
+            // 添加轨道控制器
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            controls.minDistance = 3;
+            controls.maxDistance = 20;
+            
+            // 添加光源
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(10, 20, 15);
+            directionalLight.castShadow = true;
+            directionalLight.shadow.camera.left = -20;
+            directionalLight.shadow.camera.right = 20;
+            directionalLight.shadow.camera.top = 20;
+            directionalLight.shadow.camera.bottom = -20;
+            scene.add(directionalLight);
+            
+            // 添加地面
+            const groundGeometry = new THREE.PlaneGeometry(30, 30);
+            const groundMaterial = new THREE.MeshStandardMaterial({ 
+                color: 0x1a1a2e,
+                roughness: 0.8,
+                metalness: 0.2
+            });
+            const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+            ground.rotation.x = -Math.PI / 2;
+            ground.receiveShadow = true;
+            scene.add(ground);
+            
+            // 添加网格辅助地面
+            const gridHelper = new THREE.GridHelper(30, 30, 0x2a2a3e, 0x1a1a2e);
+            scene.add(gridHelper);
+            
+            // 创建汽车模型
+            createCar();
+            
+            // 如果要加载自定义模型，取消注释下面这行并修改路径
+            // loadCustomModel("models/your-car-model.glb");
+            
+            // 添加窗口大小调整监听器
+            window.addEventListener('resize', onWindowResize);
+            
+            // 初始化UI事件监听
+            initUIEvents();
+            
+            // 开始动画循环
+            animate();
+            
+            // 自定义模型加载函数 - 取消注释并修改路径以加载您的模型
+        }
+        
+        // 创建汽车模型
+        function createCar() {
+            // 汽车主组
+            const car = new THREE.Group();
+            
+            // 创建车身
+            const bodyGeometry = new THREE.BoxGeometry(4, 1.2, 2);
+            const bodyMaterial = new THREE.MeshPhysicalMaterial({ 
+                color: new THREE.Color(carColor.r, carColor.g, carColor.b),
+                roughness: 0.3,
+                metalness: 0.8,
+                clearcoat: 1.0,
+                clearcoatRoughness: 0.1
+            });
+            carBody = new THREE.Mesh(bodyGeometry, bodyMaterial);
+            carBody.castShadow = true;
+            carBody.receiveShadow = true;
+            carBody.position.y = 1.2;
+            car.add(carBody);
+            
+            // 创建车顶
+            const roofGeometry = new THREE.BoxGeometry(2.5, 0.8, 1.8);
+            const roofMaterial = new THREE.MeshPhysicalMaterial({ 
+                color: new THREE.Color(carColor.r * 0.8, carColor.g * 0.8, carColor.b * 0.8),
+                roughness: 0.4,
+                metalness: 0.6
+            });
+            const roof = new THREE.Mesh(roofGeometry, roofMaterial);
+            roof.castShadow = true;
+            roof.receiveShadow = true;
+            roof.position.set(0, 2.2, 0);
+            car.add(roof);
+            
+            // 创建车窗
+            const windowGeometry = new THREE.BoxGeometry(2.3, 0.7, 1.6);
+            const windowMaterial = new THREE.MeshPhysicalMaterial({ 
+                color: 0x111122,
+                transparent: true,
+                opacity: 0.7,
+                transmission: 0.9,
+                roughness: 0.1,
+                metalness: 0.9
+            });
+            const window = new THREE.Mesh(windowGeometry, windowMaterial);
+            window.castShadow = true;
+            window.receiveShadow = true;
+            window.position.set(0, 2.2, 0);
+            car.add(window);
+            
+            // 创建前保险杠
+            const frontBumperGeometry = new THREE.BoxGeometry(3.8, 0.4, 0.3);
+            const bumperMaterial = new THREE.MeshStandardMaterial({ 
+                color: 0x222222,
+                roughness: 0.7,
+                metalness: 0.3
+            });
+            const frontBumper = new THREE.Mesh(frontBumperGeometry, bumperMaterial);
+            frontBumper.castShadow = true;
+            frontBumper.position.set(0, 0.8, 1.35);
+            car.add(frontBumper);
+            
+            // 创建后保险杠
+            const rearBumper = new THREE.Mesh(frontBumperGeometry, bumperMaterial);
+            rearBumper.castShadow = true;
+            rearBumper.position.set(0, 0.8, -1.35);
+            car.add(rearBumper);
+            
+            // 创建前车灯
+            const headlightGeometry = new THREE.CylinderGeometry(0.2, 0.2, 0.1, 16);
+            const headlightMaterial = new THREE.MeshStandardMaterial({ 
+                color: 0xffffcc,
+                emissive: 0xffff99,
+                emissiveIntensity: 0.5
+            });
+            
+            const headlightLeft = new THREE.Mesh(headlightGeometry, headlightMaterial);
+            headlightLeft.castShadow = true;
+            headlightLeft.position.set(-1.5, 1.0, 1.2);
+            headlightLeft.rotation.x = Math.PI / 2;
+            car.add(headlightLeft);
+            
+            const headlightRight = new THREE.Mesh(headlightGeometry, headlightMaterial);
+            headlightRight.castShadow = true;
+            headlightRight.position.set(1.5, 1.0, 1.2);
+            headlightRight.rotation.x = Math.PI / 2;
+            car.add(headlightRight);
+            
+            // 创建尾灯
+            const taillightGeometry = new THREE.BoxGeometry(0.3, 0.3, 0.1);
+            const taillightMaterial = new THREE.MeshStandardMaterial({ 
+                color: 0xff3333,
+                emissive: 0xff0000,
+                emissiveIntensity: 0.5
+            });
+            
+            const taillightLeft = new THREE.Mesh(taillightGeometry, taillightMaterial);
+            taillightLeft.castShadow = true;
+            taillightLeft.position.set(-1.2, 1.0, -1.3);
+            car.add(taillightLeft);
+            
+            const taillightRight = new THREE.Mesh(taillightGeometry, taillightMaterial);
+            taillightRight.castShadow = true;
+            taillightRight.position.set(1.2, 1.0, -1.3);
+            car.add(taillightRight);
+            
+            // 创建车轮
+            createWheel(car, -1.5, 0.6, 1.3, wheelColor); // 左前轮
+            createWheel(car, 1.5, 0.6, 1.3, wheelColor);  // 右前轮
+            createWheel(car, -1.5, 0.6, -1.3, wheelColor); // 左后轮
+            createWheel(car, 1.5, 0.6, -1.3, wheelColor);  // 右后轮
+            
+            // 将汽车添加到场景
+            scene.add(car);
+        }
+        
+        // 创建车轮函数
+        function createWheel(car, x, y, z, color) {
+            const wheelGroup = new THREE.Group();
+            
+            // 轮胎
+            const tireGeometry = new THREE.CylinderGeometry(0.5, 0.5, 0.3, 32);
+            const tireMaterial = new THREE.MeshStandardMaterial({ 
+                color: color,
+                roughness: 0.7,
+                metalness: 0.3
+            });
+            const tire = new THREE.Mesh(tireGeometry, tireMaterial);
+            tire.castShadow = true;
+            tire.rotation.z = Math.PI / 2;
+            wheelGroup.add(tire);
+            
+            // 轮毂
+            const rimGeometry = new THREE.CylinderGeometry(0.3, 0.3, 0.32, 16);
+            const rimMaterial = new THREE.MeshStandardMaterial({ 
+                color: 0xcccccc,
+                roughness: 0.2,
+                metalness: 0.9
+            });
+            const rim = new THREE.Mesh(rimGeometry, rimMaterial);
+            rim.castShadow = true;
+            rim.rotation.z = Math.PI / 2;
+            wheelGroup.add(rim);
+            
+            // 轮毂细节
+            const hubGeometry = new THREE.CylinderGeometry(0.1, 0.1, 0.34, 8);
+            const hubMaterial = new THREE.MeshStandardMaterial({ 
+                color: 0x888888,
+                roughness: 0.1,
+                metalness: 0.95
+            });
+            const hub = new THREE.Mesh(hubGeometry, hubMaterial);
+            hub.castShadow = true;
+            hub.rotation.z = Math.PI / 2;
+            wheelGroup.add(hub);
+            
+            wheelGroup.position.set(x, y, z);
+            
+            // 根据位置将车轮添加到不同的数组
+            if (z > 0) {
+                frontWheels.push(wheelGroup);
+            } else {
+                rearWheels.push(wheelGroup);
+            }
+            
+            car.add(wheelGroup);
+        }
+        
+        // 更新车身颜色
+        function updateBodyColor() {
+            if (carBody && carBody.material) {
+                // 设置车身主要颜色
+                carBody.material.color.setRGB(carColor.r, carColor.g, carColor.b);
+                carBody.material.needsUpdate = true;
+                
+                // 更新车顶颜色（稍微暗一些）
+                scene.traverse(function(object) {
+                    if (object.isMesh && object.geometry.type === "BoxGeometry" && 
+                        object.position.y > 2 && object !== carBody) {
+                        // 这可能是车顶
+                        if (object.material.color) {
+                            // 车顶颜色比车身暗20%
+                            object.material.color.setRGB(carColor.r * 0.8, carColor.g * 0.8, carColor.b * 0.8);
+                            object.material.needsUpdate = true;
+                        }
+                    }
+                });
+            }
+        }
+        
+        // 更新车轮颜色
+        function updateWheelColor(color) {
+            wheelColor = color;
+            
+            // 遍历场景中的所有对象，找到轮胎并更新颜色
+            scene.traverse(function(object) {
+                if (object.isMesh && object.geometry.type === "CylinderGeometry" && 
+                    object.material.color && object.position.y < 1) {
+                    // 这可能是轮胎 - 通过几何体类型和位置判断
+                    object.material.color.setHex(color);
+                    object.material.needsUpdate = true;
+                }
+            });
+        }
+        
+        // 窗口大小调整处理
+        function onWindowResize() {
+            const container = document.getElementById('car-container');
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        }
+        
+        // 初始化UI事件
+        function initUIEvents() {
+            // 颜色滑块
+            const colorR = document.getElementById('color-r');
+            const colorG = document.getElementById('color-g');
+            const colorB = document.getElementById('color-b');
+            const colorRVal = document.getElementById('color-r-val');
+            const colorGVal = document.getElementById('color-g-val');
+            const colorBVal = document.getElementById('color-b-val');
+            
+            colorR.addEventListener('input', function() {
+                carColor.r = this.value / 255;
+                colorRVal.textContent = this.value;
+                updateBodyColor();
+            });
+            
+            colorG.addEventListener('input', function() {
+                carColor.g = this.value / 255;
+                colorGVal.textContent = this.value;
+                updateBodyColor();
+            });
+            
+            colorB.addEventListener('input', function() {
+                carColor.b = this.value / 255;
+                colorBVal.textContent = this.value;
+                updateBodyColor();
+            });
+            
+            // 车窗透明度
+            const windowOpacity = document.getElementById('window-opacity');
+            const windowOpacityVal = document.getElementById('window-opacity-val');
+            
+            windowOpacity.addEventListener('input', function() {
+                const opacity = parseFloat(this.value);
+                windowOpacityVal.textContent = opacity.toFixed(1);
+                
+                // 更新车窗透明度
+                scene.traverse(function(object) {
+                    if (object.isMesh && object.geometry.type === "BoxGeometry" && 
+                        object.material.transparent) {
+                        // 找到车窗对象并更新透明度
+                        object.material.opacity = opacity;
+                        object.material.needsUpdate = true;
+                    }
+                });
+            });
+            
+            // 颜色重置按钮
+            document.getElementById('color-reset').addEventListener('click', function() {
+                carColor = { r: 50/255, g: 120/255, b: 200/255 };
+                colorR.value = 50;
+                colorG.value = 120;
+                colorB.value = 200;
+                colorRVal.textContent = 50;
+                colorGVal.textContent = 120;
+                colorBVal.textContent = 200;
+                updateBodyColor();
+            });
+            
+            // 随机颜色按钮
+            document.getElementById('color-random').addEventListener('click', function() {
+                // 生成随机RGB颜色值
+                carColor = {
+                    r: Math.random(),
+                    g: Math.random(),
+                    b: Math.random()
+                };
+                
+                // 更新滑块和显示值
+                colorR.value = Math.floor(carColor.r * 255);
+                colorG.value = Math.floor(carColor.g * 255);
+                colorB.value = Math.floor(carColor.b * 255);
+                colorRVal.textContent = colorR.value;
+                colorGVal.textContent = colorG.value;
+                colorBVal.textContent = colorB.value;
+                
+                // 应用新的车身颜色
+                updateBodyColor();
+            });
+            
+            // 车轮颜色按钮
+            document.getElementById('wheel-silver').addEventListener('click', function() {
+                updateWheelColor(0xcccccc);
+            });
+            
+            document.getElementById('wheel-black').addEventListener('click', function() {
+                updateWheelColor(0x333333);
+            });
+            
+            document.getElementById('wheel-gold').addEventListener('click', function() {
+                updateWheelColor(0xffd700);
+            });
+            
+            // 视图控制按钮
+            document.getElementById('view-front').addEventListener('click', function() {
+                controls.reset();
+                camera.position.set(0, 3, 10);
+                controls.update();
+            });
+            
+            document.getElementById('view-side').addEventListener('click', function() {
+                controls.reset();
+                camera.position.set(10, 3, 0);
+                controls.update();
+            });
+            
+            document.getElementById('view-top').addEventListener('click', function() {
+                controls.reset();
+                camera.position.set(0, 15, 0);
+                camera.lookAt(0, 0, 0);
+                controls.update();
+            });
+            
+            // 动画控制按钮
+            document.getElementById('rotate-toggle').addEventListener('click', function() {
+                // 切换整个汽车模型的旋转动画状态
+                isRotating = !isRotating;
+                this.textContent = isRotating ? '停止旋转' : '旋转动画';
+                this.style.backgroundColor = isRotating ? '#7209b7' : '#4361ee';
+            });
+            
+            document.getElementById('wheel-toggle').addEventListener('click', function() {
+                // 切换车轮旋转动画状态
+                areWheelsRotating = !areWheelsRotating;
+                this.textContent = areWheelsRotating ? '停止车轮' : '车轮旋转';
+                this.style.backgroundColor = areWheelsRotating ? '#e74c3c' : '#3498db';
+            });
+        }
+        
+        // 动画循环
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // 如果启用了旋转动画，旋转整个场景
+            if (isRotating) {
+                scene.rotation.y += 0.005; // 每帧旋转0.005弧度
+            }
+            
+            // 如果启用了车轮旋转，旋转车轮
+            if (areWheelsRotating) {
+                // 旋转前轮
+                frontWheels.forEach(wheel => {
+                    wheel.rotation.x += 0.05; // 每帧旋转0.05弧度
+                });
+                // 旋转后轮
+                rearWheels.forEach(wheel => {
+                    wheel.rotation.x += 0.05; // 每帧旋转0.05弧度
+                });
+            }
+            
+            // 更新控制器
+            controls.update();
+            
+            // 渲染场景
+            renderer.render(scene, camera);
+        }
+        
+        // 页面加载完成后初始化
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>

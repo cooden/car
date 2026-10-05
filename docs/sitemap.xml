@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://cooden.github.io/car/index.html</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <url><loc>https://cooden.github.io/car/compare.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://cooden.github.io/car/used.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://cooden.github.io/car/used-10w.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://cooden.github.io/car/price.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://cooden.github.io/car/cost.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://cooden.github.io/car/deals.html</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cooden.github.io/car/library.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cooden.github.io/car/news.html</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cooden.github.io/car/news-detail.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://cooden.github.io/car/model.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://cooden.github.io/car/power.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://cooden.github.io/car/about.html</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://cooden.github.io/car/contact.html</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://cooden.github.io/car/privacy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+</urlset>
