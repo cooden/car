@@ -56,6 +56,31 @@ public class PageController {
         return "forward:/news.html";
     }
 
+    @GetMapping("/news-detail")
+    public String newsDetail() {
+        return "forward:/news-detail.html";
+    }
+
+    @GetMapping("/price")
+    public String price() {
+        return "forward:/price.html";
+    }
+
+    @GetMapping("/cost")
+    public String cost() {
+        return "forward:/cost.html";
+    }
+
+    @GetMapping("/deals")
+    public String deals() {
+        return "forward:/deals.html";
+    }
+
+    @GetMapping("/library")
+    public String library() {
+        return "forward:/library.html";
+    }
+
     @GetMapping("/stats")
     public String stats() {
         return "forward:/stats.html";

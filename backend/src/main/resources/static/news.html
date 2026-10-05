@@ -60,14 +60,15 @@
         <a href="/">首页</a>
         <a href="/#ranking">新车排行</a>
         <a href="/compare">新车对比</a>
-        <a href="/used">二手车对比</a>
+        <a href="/price">落地价</a>
+        <a href="/cost">养车成本</a>
+        <a href="/used">二手车</a>
         <a href="/used-10w">10万推荐</a>
-        <a href="/news" class="active">购车资讯</a>
-        <a href="/model">车型展厅</a>
+        <a href="/deals">降价行情</a>
+        <a href="/library">车型库</a>
+        <a href="/news" class="active">资讯</a>
+        <a href="/model">展厅</a>
         <a href="/power">油电成本</a>
-        <a href="/about">关于我们</a>
-        <a href="/contact">联系我们</a>
-        <a href="/privacy">隐私政策</a>
     </div>
 
     <div class="content">
@@ -109,16 +110,16 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             const grid = document.getElementById('news-grid');
-            articles.forEach(article => {
+            articles.forEach((article, index) => {
                 const card = document.createElement('div');
                 card.classList.add('news-card');
                 card.innerHTML = `
                     <div class="news-cover" style="background:linear-gradient(135deg,${article.color},#2c3e50);">${article.cat}</div>
                     <div class="news-body">
                         <span class="news-cat">${article.cat}</span>
-                        <h3>${article.title}</h3>
+                        <h3><a href="/news-detail?id=${index + 1}" style="color:#2c3e50;text-decoration:none;" onmouseover="this.style.color='#3498db'" onmouseout="this.style.color='#2c3e50'">${article.title}</a></h3>
                         <p>${article.summary}</p>
-                        <div class="news-date">${article.date}</div>
+                        <div class="news-date">${article.date} · <a href="/news-detail?id=${index + 1}" style="color:#3498db;text-decoration:none;">阅读全文 →</a></div>
                     </div>
                 `;
                 grid.appendChild(card);

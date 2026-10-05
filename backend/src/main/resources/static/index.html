@@ -49,9 +49,15 @@
         }
         .section-sub {
             color: #7f8c8d;
-            margin: -12px 0 20px 17px;
+            margin: 0px 0 20px 17px;
             font-size: 0.9rem;
         }
+
+        /* 排行 tab */
+        .tabs { display: flex; gap: 10px; flex-wrap: wrap; margin: 0 0 18px 17px; }
+        .tab-btn { padding: 9px 20px; background: #fff; color: #555; border: 1px solid #ddd; border-radius: 20px; cursor: pointer; font-size: 0.9rem; transition: all 0.2s; }
+        .tab-btn:hover { border-color: #3498db; color: #3498db; }
+        .tab-btn.active { background: #3498db; color: #fff; border-color: #3498db; }
 
         .ads-container {
             margin: 20px auto;
@@ -230,19 +236,20 @@
         <a href="/" class="active">首页</a>
         <a href="/#ranking">新车排行</a>
         <a href="/compare">新车对比</a>
-        <a href="/used">二手车对比</a>
+        <a href="/price">落地价</a>
+        <a href="/cost">养车成本</a>
+        <a href="/used">二手车</a>
         <a href="/used-10w">10万推荐</a>
-        <a href="/news">购车资讯</a>
-        <a href="/model">车型展厅</a>
+        <a href="/deals">降价行情</a>
+        <a href="/library">车型库</a>
+        <a href="/news">资讯</a>
+        <a href="/model">展厅</a>
         <a href="/power">油电成本</a>
-        <a href="/about">关于我们</a>
-        <a href="/contact">联系我们</a>
-        <a href="/privacy">隐私政策</a>
     </div>
 
     <div class="hero">
         <h1>买车指南 - 帮您买对车，不踩坑</h1>
-        <p>聚合 20-50 万热门 SUV 新车排行、新车参数对比、二手车对比选购、10 万元以内二手车推荐榜单与购车资讯干货，一站式解决选车难题。</p>
+        <p>聚合 SUV、轿车与新能源热门新车排行、新车参数对比、落地价与养车成本计算、二手车对比选购、10 万元以内二手车推荐、降价行情与购车资讯干货，一站式解决选车难题。</p>
     </div>
 
     <!-- 广告位 1：首屏下方横幅 -->
@@ -259,7 +266,12 @@
     </div>
 
     <div class="content">
-        <h2 class="section-title" id="ranking">20-50万 SUV 新车排行</h2>
+        <h2 class="section-title" id="ranking">热门新车排行榜</h2>
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchRank('suv', this)">SUV 榜</button>
+            <button class="tab-btn" onclick="switchRank('sedan', this)">轿车榜</button>
+            <button class="tab-btn" onclick="switchRank('ev', this)">新能源榜</button>
+        </div>
         <p class="section-sub">综合销量、口碑与性价比整理的参考榜单，排名不分先后，点击「新车对比」可横向对比参数。</p>
         <div class="car-ranking" id="car-ranking-list">
             <!-- 车型卡片将通过JavaScript动态加载 -->
@@ -281,6 +293,26 @@
                 <div class="entry-icon">🏆</div>
                 <h3>10万二手车推荐</h3>
                 <p>预算 10 万以内高性价比二手车榜单，附亮点标签与选购建议。</p>
+            </a>
+            <a class="entry-card" href="/price">
+                <div class="entry-icon">💰</div>
+                <h3>落地价计算</h3>
+                <p>裸车价 + 购置税 + 保险 + 上牌，一键算清新车落地总价，拒绝隐性收费。</p>
+            </a>
+            <a class="entry-card" href="/cost">
+                <div class="entry-icon">🛠</div>
+                <h3>养车成本计算</h3>
+                <p>油费电费、保险、保养、停车加起来，算清养车一年到底花多少钱。</p>
+            </a>
+            <a class="entry-card" href="/deals">
+                <div class="entry-icon">📉</div>
+                <h3>降价行情</h3>
+                <p>汇总主流车型最新终端优惠与参考成交价，把握最佳购车时机。</p>
+            </a>
+            <a class="entry-card" href="/library">
+                <div class="entry-icon">📚</div>
+                <h3>热门车型库</h3>
+                <p>按级别快速筛选 SUV、轿车、MPV 与新能源热门车型，参数价格一览。</p>
             </a>
         </div>
 
@@ -342,6 +374,34 @@
             { "品牌": "大众", "子品牌": "大众", "车型": "途观L Pro", "最低配车型": "2025款 380TSI 四驱智驾版", "官方指导价": "26.68万", "image": "", "tags": ["燃油", "德系", "操控"] }
         ];
 
+        const sedanData = [
+            { "品牌": "比亚迪", "子品牌": "比亚迪", "车型": "秦PLUS DM-i", "最低配车型": "2025款 插混 120KM 领先型", "官方指导价": "9.98万", "image": "", "tags": ["插混", "热销", "免税"] },
+            { "品牌": "日产", "子品牌": "日产", "车型": "轩逸", "最低配车型": "2024款 1.6L CVT 舒适版", "官方指导价": "10.86万", "image": "", "tags": ["省油", "舒适", "保有量大"] },
+            { "品牌": "大众", "子品牌": "大众", "车型": "朗逸", "最低配车型": "2025款 1.5L 自动风尚版", "官方指导价": "12.09万", "image": "", "tags": ["德系", "空间", "销量"] },
+            { "品牌": "丰田", "子品牌": "丰田", "车型": "卡罗拉", "最低配车型": "2024款 1.2T 精英版", "官方指导价": "12.88万", "image": "", "tags": ["耐用", "低油耗", "口碑"] },
+            { "品牌": "大众", "子品牌": "大众", "车型": "速腾", "最低配车型": "2025款 200TSI 超越版", "官方指导价": "13.99万", "image": "", "tags": ["操控", "质感", "A+级"] },
+            { "品牌": "比亚迪", "子品牌": "比亚迪", "车型": "汉DM-i", "最低配车型": "2025款 125KM 精英型", "官方指导价": "16.98万", "image": "", "tags": ["插混", "中大型", "豪华"] },
+            { "品牌": "丰田", "子品牌": "丰田", "车型": "凯美瑞", "最低配车型": "2025款 2.0G 豪华版", "官方指导价": "17.98万", "image": "", "tags": ["保值", "舒适", "口碑"] },
+            { "品牌": "本田", "子品牌": "本田", "车型": "雅阁", "最低配车型": "2025款 260TURBO 豪华版", "官方指导价": "17.98万", "image": "", "tags": ["运动", "空间", "操控"] },
+            { "品牌": "大众", "子品牌": "大众", "车型": "帕萨特", "最低配车型": "2025款 330TSI 星辉版", "官方指导价": "18.19万", "image": "", "tags": ["商务", "空间", "德系"] },
+            { "品牌": "大众", "子品牌": "大众", "车型": "迈腾", "最低配车型": "2025款 330TSI 领先版", "官方指导价": "19.99万", "image": "", "tags": ["商务", "质感", "动力"] }
+        ];
+
+        const evData = [
+            { "品牌": "特斯拉", "子品牌": "特斯拉", "车型": "Model Y", "最低配车型": "2025款 后轮驱动版", "官方指导价": "26.35万", "image": "", "tags": ["纯电", "销量王", "超充"] },
+            { "品牌": "小米", "子品牌": "小米", "车型": "小米SU7", "最低配车型": "2025款 后驱标准版", "官方指导价": "21.59万", "image": "", "tags": ["纯电", "颜值", "生态"] },
+            { "品牌": "特斯拉", "子品牌": "特斯拉", "车型": "Model 3", "最低配车型": "2025款 后轮驱动版", "官方指导价": "23.55万", "image": "", "tags": ["纯电", "操控", "续航"] },
+            { "品牌": "比亚迪", "子品牌": "比亚迪", "车型": "海豹", "最低配车型": "2025款 后驱 荣耀版", "官方指导价": "17.98万", "image": "", "tags": ["纯电", "平台", "性价比"] },
+            { "品牌": "比亚迪", "子品牌": "比亚迪", "车型": "汉EV", "最低配车型": "2025款 506KM 尊贵型", "官方指导价": "21.98万", "image": "", "tags": ["纯电", "豪华", "刀片电池"] },
+            { "品牌": "理想", "子品牌": "理想", "车型": "理想L6", "最低配车型": "2025款 Pro", "官方指导价": "24.98万", "image": "", "tags": ["增程", "5座", "配置高"] },
+            { "品牌": "极氪", "子品牌": "极氪", "车型": "极氪001", "最低配车型": "2025款 WE版 100kWh", "官方指导价": "26.90万", "image": "", "tags": ["纯电", "猎装", "800V"] },
+            { "品牌": "小鹏", "子品牌": "小鹏", "车型": "小鹏P7+", "最低配车型": "2025款 长续航版", "官方指导价": "19.99万", "image": "", "tags": ["纯电", "智驾", "800V"] },
+            { "品牌": "智己", "子品牌": "智己", "车型": "智己L6", "最低配车型": "2025款 Max 标准版", "官方指导价": "21.99万", "image": "", "tags": ["纯电", "后轮转向", "800V"] },
+            { "品牌": "蔚来", "子品牌": "蔚来", "车型": "蔚来ET5", "最低配车型": "2025款 75kWh", "官方指导价": "29.80万", "image": "", "tags": ["纯电", "换电", "服务"] }
+        ];
+
+        const rankData = { suv: carData, sedan: sedanData, ev: evData };
+
         const newsData = [
             { "cat": "导购", "title": "家用第一台 SUV 怎么选？燃油、插混、纯电一文讲透", "summary": "从用车场景、补能条件到用车成本，手把手教你确定动力类型，再谈具体车型。", "date": "2026-09-28" },
             { "cat": "行情", "title": "金九银十购车优惠季，经销商终端行情汇总", "summary": "多家主流品牌终端优惠幅度盘点，什么时候出手最划算？", "date": "2026-09-22" },
@@ -349,9 +409,10 @@
             { "cat": "新能源", "title": "800V 高压平台能带来什么？充电速度实测对比", "summary": "同样补能 10 分钟，400V 与 800V 平台差距有多大？我们用数据说话。", "date": "2026-09-08" }
         ];
 
-        document.addEventListener('DOMContentLoaded', () => {
+        function renderRanking(key) {
             const carRankingList = document.getElementById('car-ranking-list');
-            carData.forEach((car, index) => {
+            carRankingList.innerHTML = '';
+            rankData[key].forEach((car, index) => {
                 const carCard = document.createElement('div');
                 carCard.classList.add('car-card');
                 const imageHtml = car.image
@@ -369,16 +430,26 @@
                 `;
                 carRankingList.appendChild(carCard);
             });
+        }
+
+        function switchRank(key, btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderRanking(key);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderRanking('suv');
 
             const newsList = document.getElementById('news-list');
-            newsData.forEach(news => {
+            newsData.forEach((news, index) => {
                 const newsCard = document.createElement('div');
                 newsCard.classList.add('news-card');
                 newsCard.innerHTML = `
                     <span class="news-cat">${news.cat}</span>
-                    <h3>${news.title}</h3>
+                    <h3><a href="/news-detail?id=${index + 1}" style="color:#2c3e50;text-decoration:none;" onmouseover="this.style.color='#3498db'" onmouseout="this.style.color='#2c3e50'">${news.title}</a></h3>
                     <p>${news.summary}</p>
-                    <div class="news-date">${news.date}</div>
+                    <div class="news-date">${news.date} · <a href="/news-detail?id=${index + 1}" style="color:#3498db;text-decoration:none;">阅读全文 →</a></div>
                 `;
                 newsList.appendChild(newsCard);
             });
