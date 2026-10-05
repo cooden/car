@@ -1,0 +1,21 @@
+# 构建产物
+backend/target/
+*.class
+
+# 运行数据
+backend/data/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# 依赖
+node_modules/
+
+# 小程序私有配置
+project.private.config.json
+
+# 系统文件
+Thumbs.db
+.DS_Store

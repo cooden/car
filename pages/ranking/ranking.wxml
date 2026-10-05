@@ -1,0 +1,22 @@
+<view class="navbar">
+    <navigator url="/pages/index/index" class="nav-item">首页</navigator>
+    <navigator url="/pages/brand/byd" class="nav-item">比亚迪</navigator>
+    <navigator url="/pages/brand/geely" class="nav-item">吉利</navigator>
+    <navigator url="/pages/brand/zeekr" class="nav-item">极氪</navigator>
+    <navigator url="/pages/brand/denza" class="nav-item">腾势</navigator>
+</view>
+<view class="content">
+    <text class="title">20-50万SUV车型排行</text>
+    <view class="car-ranking-container">
+        <view class="car-ranking">
+            <block wx:for="{{carList}}" wx:key="index">
+                <view class="car-card">
+                    <image src="{{item.image}}" alt="{{item.model}}" class="car-image" mode="aspectFill"></image>
+                    <text class="car-name">{{item.model}}</text>
+                    <text class="car-brand">{{item.brand}} - {{item.subBrand}}</text>
+                    <text class="car-price">{{item.price}}起</text>
+                </view>
+            </block>
+        </view>
+    </view>
+</view>
