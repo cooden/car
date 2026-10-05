@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购车资讯 - 导购行情评测干货 - 买车指南</title>
+    <meta name="description" content="买车指南资讯频道：新车导购、市场行情、二手车避坑、新能源充电实测等购车干货文章，持续更新。">
+    <meta name="keywords" content="购车资讯,汽车导购,汽车行情,二手车知识,新能源评测">
+    <!-- Google AdSense 脚本 -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', sans-serif; background-color: #f5f5f5; color: #333; }
+        .navbar { background-color: #333; overflow: hidden; }
+        .navbar a { float: left; display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none; }
+        .navbar a:hover { background-color: #ddd; color: black; }
+        .navbar a.active { background-color: #3498db; color: #fff; }
+        .content { padding: 20px; max-width: 1100px; margin: 0 auto; }
+        h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; margin-bottom: 20px; }
+        .news-grid { display: flex; flex-wrap: wrap; gap: 20px; }
+        .news-card {
+            width: 330px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+        .news-card:hover { transform: translateY(-4px); }
+        .news-cover {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .news-body { padding: 16px 18px; }
+        .news-cat {
+            display: inline-block;
+            background: #eaf4fd;
+            color: #2980b9;
+            border-radius: 4px;
+            padding: 2px 8px;
+            font-size: 0.75rem;
+            margin-bottom: 8px;
+        }
+        .news-body h3 { font-size: 1rem; color: #2c3e50; margin-bottom: 8px; line-height: 1.5; }
+        .news-body p { color: #7f8c8d; font-size: 0.85rem; line-height: 1.6; }
+        .news-date { color: #b0b9be; font-size: 0.75rem; margin-top: 10px; }
+        .ads-container { margin: 20px auto; max-width: 1100px; padding: 10px; text-align: center; background: #fff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        footer { margin-top: 40px; background: #333; color: #ccc; text-align: center; padding: 25px 20px; font-size: 0.85rem; line-height: 1.8; }
+        footer a { color: #9eccef; text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">首页</a>
+        <a href="/#ranking">新车排行</a>
+        <a href="/compare">新车对比</a>
+        <a href="/used">二手车对比</a>
+        <a href="/used-10w">10万推荐</a>
+        <a href="/news" class="active">购车资讯</a>
+        <a href="/model">车型展厅</a>
+        <a href="/power">油电成本</a>
+        <a href="/about">关于我们</a>
+        <a href="/contact">联系我们</a>
+        <a href="/privacy">隐私政策</a>
+    </div>
+
+    <div class="content">
+        <h1>购车资讯</h1>
+        <div class="news-grid" id="news-grid"></div>
+
+        <!-- 广告位 -->
+        <div class="ads-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                 data-ad-slot="XXXXXXXXXX"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+
+    <footer>
+        <p><a href="/about">关于我们</a> | <a href="/contact">联系我们</a> | <a href="/privacy">隐私政策</a> | <a href="/stats">流量统计</a></p>
+        <p>买车指南 &copy; 2026 | 文章内容仅供参考，不构成购买建议</p>
+    </footer>
+
+    <script>
+        const articles = [
+            { cat: "导购", color: "#3498db", title: "家用第一台 SUV 怎么选？燃油、插混、纯电一文讲透", summary: "从用车场景、补能条件到用车成本，手把手教你确定动力类型，再谈具体车型。", date: "2026-09-28" },
+            { cat: "行情", color: "#e67e22", title: "金九银十购车优惠季，经销商终端行情汇总", summary: "多家主流品牌终端优惠幅度盘点，什么时候出手最划算？", date: "2026-09-22" },
+            { cat: "二手车", color: "#8e44ad", title: "二手车避坑指南：调表车、泡水车如何一眼识别", summary: "查验维保记录、观察螺丝痕迹、闻内饰气味，几个实用技巧降低踩坑概率。", date: "2026-09-15" },
+            { cat: "新能源", color: "#16a085", title: "800V 高压平台能带来什么？充电速度实测对比", summary: "同样补能 10 分钟，400V 与 800V 平台差距有多大？我们用数据说话。", date: "2026-09-08" },
+            { cat: "新能源", color: "#16a085", title: "家充桩安装全流程：从申请到通电的避坑清单", summary: "物业、电网、安装公司的每一步怎么走，最快多久能用上谷电充电？", date: "2026-08-30" },
+            { cat: "导购", color: "#3498db", title: "预算 15 万买轿车，轩逸思域秦PLUS 该怎么选？", summary: "三款销量榜常客的同价位对决，舒适、运动、省油各有胜负。", date: "2026-08-21" },
+            { cat: "行情", color: "#e67e22", title: "新能源价格战进入深水区，等等党还能等到什么？", summary: "电池原材料回落、新车型密集上市，下半年价格走势分析。", date: "2026-08-12" },
+            { cat: "二手", color: "#8e44ad", title: "二手车贷款划不划算？手续费与利率全拆解", summary: "车商金融 vs 银行直贷实时对比，多花的利息算给你看。", date: "2026-08-05" },
+            { cat: "导购", color: "#3498db", title: "二孩家庭 7 座车怎么选？MPV 与 SUV 的权衡", summary: "223 还是 232 布局？老人小孩上下车的真实体验差异。", date: "2026-07-28" },
+            { cat: "新能源", color: "#16a085", title: "冬季续航缩水 30%？低温用车省钱小技巧", summary: "预热温控、谷电慢充几个细节，冬天也能跑得更远。", date: "2026-07-19" }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const grid = document.getElementById('news-grid');
+            articles.forEach(article => {
+                const card = document.createElement('div');
+                card.classList.add('news-card');
+                card.innerHTML = `
+                    <div class="news-cover" style="background:linear-gradient(135deg,${article.color},#2c3e50);">${article.cat}</div>
+                    <div class="news-body">
+                        <span class="news-cat">${article.cat}</span>
+                        <h3>${article.title}</h3>
+                        <p>${article.summary}</p>
+                        <div class="news-date">${article.date}</div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        });
+    </script>
+</body>
+</html>

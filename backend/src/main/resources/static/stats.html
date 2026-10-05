@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>流量统计 - 站点访问数据面板</title>
+    <meta name="description" content="站点流量统计面板：查看总访问量、当日访问量与各页面 PV 排行。">
+    <meta name="robots" content="noindex,nofollow">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', sans-serif; background-color: #f5f5f5; color: #333; }
+        .navbar { background-color: #333; overflow: hidden; }
+        .navbar a { float: left; display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none; }
+        .navbar a:hover { background-color: #ddd; color: black; }
+        .navbar a.active { background-color: #3498db; color: #fff; }
+        .content { padding: 20px; max-width: 1000px; margin: 0 auto; }
+        h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; margin-bottom: 20px; }
+        .cards { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 25px; }
+        .stat-card {
+            flex: 1;
+            min-width: 200px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            text-align: center;
+        }
+        .stat-card .label { color: #7f8c8d; font-size: 0.85rem; margin-bottom: 8px; }
+        .stat-card .value { font-size: 2rem; font-weight: bold; color: #2c3e50; }
+        .stat-card.today .value { color: #27ae60; }
+        .panel {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .panel h2 { color: #2c3e50; font-size: 1.1rem; margin-bottom: 15px; border-bottom: 2px solid #3498db; padding-bottom: 8px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 10px 12px; text-align: center; border-bottom: 1px solid #eee; font-size: 0.9rem; }
+        th { background: #2c3e50; color: #fff; }
+        tr:hover td { background: #fafafa; }
+        .bar-wrap { display: flex; align-items: center; gap: 10px; }
+        .bar { height: 14px; border-radius: 7px; background: linear-gradient(90deg, #3498db, #2ecc71); }
+        .bar-num { font-weight: bold; color: #2c3e50; min-width: 60px; text-align: right; }
+        .empty { color: #b0b9be; text-align: center; padding: 20px; }
+        .refresh { color: #7f8c8d; font-size: 0.8rem; text-align: center; margin-top: 10px; }
+        footer { margin-top: 40px; background: #333; color: #ccc; text-align: center; padding: 25px 20px; font-size: 0.85rem; line-height: 1.8; }
+        footer a { color: #9eccef; text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">首页</a>
+        <a href="/#ranking">新车排行</a>
+        <a href="/compare">新车对比</a>
+        <a href="/used">二手车对比</a>
+        <a href="/used-10w">10万推荐</a>
+        <a href="/news">购车资讯</a>
+        <a href="/model">车型展厅</a>
+        <a href="/power">油电成本</a>
+        <a href="/stats" class="active">流量统计</a>
+    </div>
+
+    <div class="content">
+        <h1>流量统计面板</h1>
+
+        <div class="cards">
+            <div class="stat-card">
+                <div class="label">累计访问量 (PV)</div>
+                <div class="value" id="total-pv">-</div>
+            </div>
+            <div class="stat-card today">
+                <div class="label">今日访问量 (PV)</div>
+                <div class="value" id="today-pv">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">统计日期</div>
+                <div class="value" id="today-date" style="font-size:1.2rem;">-</div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>各页面访问排行（累计）</h2>
+            <table id="page-table">
+                <thead><tr><th style="width:50px;">排名</th><th>页面路径</th><th style="width:45%;">访问量</th><th style="width:90px;">PV</th></tr></thead>
+                <tbody id="page-body"><tr><td colspan="4" class="empty">加载中…</td></tr></tbody>
+            </table>
+        </div>
+
+        <div class="panel">
+            <h2>各页面访问排行（今日）</h2>
+            <table id="today-table">
+                <thead><tr><th style="width:50px;">排名</th><th>页面路径</th><th style="width:45%;">访问量</th><th style="width:90px;">PV</th></tr></thead>
+                <tbody id="today-body"><tr><td colspan="4" class="empty">加载中…</td></tr></tbody>
+            </table>
+        </div>
+
+        <p class="refresh">数据每 5 秒自动刷新，访问记录由服务端自动统计</p>
+    </div>
+
+    <footer>
+        <p><a href="/about">关于我们</a> | <a href="/contact">联系我们</a> | <a href="/privacy">隐私政策</a></p>
+        <p>买车指南 &copy; 2026 | 流量统计面板</p>
+    </footer>
+
+    <script>
+        function renderBar(entries, tbody) {
+            tbody.innerHTML = '';
+            if (!entries || entries.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" class="empty">暂无访问记录</td></tr>';
+                return;
+            }
+            const max = entries[0][1];
+            entries.forEach(([page, pv], index) => {
+                const tr = document.createElement('tr');
+                const pct = max > 0 ? Math.round(pv / max * 100) : 0;
+                tr.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td style="text-align:left;">${page}</td>
+                    <td><div class="bar-wrap"><div class="bar" style="width:${pct}%;"></div><span style="font-size:0.75rem;color:#7f8c8d;">${pct}%</span></div></td>
+                    <td><span class="bar-num">${pv}</span></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        async function load() {
+            try {
+                const res = await fetch('/api/stats');
+                const data = await res.json();
+                document.getElementById('total-pv').textContent = data.totalPv;
+                document.getElementById('today-pv').textContent = data.todayPv;
+                document.getElementById('today-date').textContent = data.today;
+                renderBar(Object.entries(data.pages || {}), document.getElementById('page-body'));
+                renderBar(Object.entries(data.todayPages || {}), document.getElementById('today-body'));
+            } catch (e) {
+                document.getElementById('total-pv').textContent = '加载失败';
+                document.getElementById('today-pv').textContent = '加载失败';
+            }
+        }
+
+        load();
+        setInterval(load, 5000);
+    </script>
+</body>
+</html>

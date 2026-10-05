@@ -22,8 +22,8 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #e6e6e6;
+            background-color: #f5f5f5;
+            color: #333;
             overflow-x: hidden;
         }
         
@@ -31,20 +31,18 @@
             text-align: center;
             padding: 20px;
             width: 100%;
-            background-color: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(5px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: #fff;
+            border-bottom: 1px solid #e5e5e5;
         }
         
         h1 {
             margin-bottom: 8px;
-            color: #4cc9f0;
+            color: #2c3e50;
             font-size: 2.5rem;
-            text-shadow: 0 0 10px rgba(76, 201, 240, 0.5);
         }
         
         .subtitle {
-            color: #a9a9a9;
+            color: #7f8c8d;
             font-size: 1.1rem;
             max-width: 800px;
             margin: 0 auto;
@@ -67,24 +65,25 @@
             height: 600px;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e5e5;
+            background: #2c3e50;
         }
         
         .controls-panel {
             flex-basis: 300px;
-            background-color: rgba(30, 30, 46, 0.8);
+            background-color: #fff;
             border-radius: 10px;
             padding: 25px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e5e5;
         }
         
         .controls-panel h2 {
-            color: #72efdd;
+            color: #2c3e50;
             margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 2px solid #3498db;
         }
         
         .control-group {
@@ -92,7 +91,7 @@
         }
         
         .control-group h3 {
-            color: #b8c1ec;
+            color: #555;
             margin-bottom: 10px;
             font-size: 1.1rem;
         }
@@ -117,13 +116,13 @@
             width: 40px;
             text-align: center;
             font-weight: bold;
-            color: #4cc9f0;
+            color: #2980b9;
         }
         
         input[type="range"] {
             -webkit-appearance: none;
             height: 8px;
-            background: rgba(255, 255, 255, 0.1);
+            background: #ddd;
             border-radius: 4px;
             outline: none;
         }
@@ -132,15 +131,15 @@
             -webkit-appearance: none;
             width: 18px;
             height: 18px;
-            background: #4cc9f0;
+            background: #3498db;
             border-radius: 50%;
             cursor: pointer;
             transition: background 0.3s;
         }
         
         input[type="range"]::-webkit-slider-thumb:hover {
-            background: #72efdd;
-            box-shadow: 0 0 10px rgba(114, 239, 221, 0.8);
+            background: #2980b9;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.8);
         }
         
         .button-group {
@@ -152,7 +151,7 @@
         
         button {
             padding: 10px 15px;
-            background-color: #4361ee;
+            background-color: #3498db;
             color: white;
             border: none;
             border-radius: 5px;
@@ -164,22 +163,23 @@
         }
         
         button:hover {
-            background-color: #3a56d4;
+            background-color: #2980b9;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
         }
         
         .instructions {
-            background-color: rgba(30, 30, 46, 0.8);
+            background-color: #fff;
             border-radius: 10px;
             padding: 20px;
             margin-top: 20px;
             max-width: 1400px;
             width: 100%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         
         .instructions h3 {
-            color: #72efdd;
+            color: #2c3e50;
             margin-bottom: 15px;
         }
         
@@ -196,7 +196,7 @@
         
         .instructions li:before {
             content: "•";
-            color: #4cc9f0;
+            color: #3498db;
             font-size: 1.5rem;
             position: absolute;
             left: 0;
@@ -212,17 +212,17 @@
         }
         
         .info-card {
-            background-color: rgba(30, 30, 46, 0.6);
+            background-color: #f8f9fa;
             border-radius: 8px;
             padding: 15px;
             flex: 1;
             min-width: 200px;
             text-align: center;
-            border-left: 4px solid #4361ee;
+            border-left: 4px solid #3498db;
         }
         
         .info-card h4 {
-            color: #b8c1ec;
+            color: #555;
             margin-bottom: 8px;
         }
         
@@ -232,21 +232,21 @@
             width: 90%;
             padding: 10px;
             text-align: center;
-            background: rgba(30, 30, 46, 0.6);
+            background: #fff;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid #e5e5e5;
         }
 
         .navbar {
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: #333;
             overflow: hidden;
             width: 100%;
-            display: flex;
-            justify-content: center;
-            backdrop-filter: blur(5px);
+            display: block;
         }
         .navbar a {
+            float: left;
+            display: block;
             color: white;
             text-align: center;
             padding: 14px 16px;
@@ -254,18 +254,23 @@
             font-size: 0.9rem;
         }
         .navbar a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: #4cc9f0;
+            background-color: #ddd;
+            color: black;
+        }
+        .navbar a.active {
+            background-color: #3498db;
+            color: #fff;
         }
         
         footer {
             margin-top: 30px;
             padding: 20px;
             text-align: center;
-            color: #a9a9a9;
+            color: #7f8c8d;
             font-size: 0.9rem;
             width: 100%;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid #e5e5e5;
+            background: #fff;
         }
         
         @media (max-width: 1100px) {
@@ -287,8 +292,13 @@
 <body>
     <div class="navbar">
         <a href="/">首页</a>
+        <a href="/#ranking">新车排行</a>
+        <a href="/compare">新车对比</a>
+        <a href="/used">二手车对比</a>
+        <a href="/used-10w">10万推荐</a>
+        <a href="/news">购车资讯</a>
+        <a href="/model" class="active">车型展厅</a>
         <a href="/power">油电成本</a>
-        <a href="/model">车型详情</a>
         <a href="/about">关于我们</a>
         <a href="/contact">联系我们</a>
         <a href="/privacy">隐私政策</a>
@@ -395,9 +405,9 @@
             </div>
         </div>
 
-        <div style="margin-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 20px;">
+        <div style="margin-top: 30px; border-top: 1px solid #e5e5e5; padding-top: 20px;">
             <h3>关于 3D 汽车展示技术</h3>
-            <p style="color: #a9a9a9; font-size: 0.95rem; margin-top: 10px;">
+            <p style="color: #7f8c8d; font-size: 0.95rem; margin-top: 10px;">
                 本项目采用 <strong>Three.js</strong> 引擎开发，这是一个基于 WebGL 的跨浏览器 JavaScript 库。通过实时渲染，我们可以在网页上实现高性能的 3D 交互体验。
                 您看到的汽车模型由数千个多边形组成，配合物理渲染材质（PBR），可以模拟真实世界中的金属反光和玻璃透明度效果。
             </p>
@@ -847,7 +857,7 @@
                 // 切换车轮旋转动画状态
                 areWheelsRotating = !areWheelsRotating;
                 this.textContent = areWheelsRotating ? '停止车轮' : '车轮旋转';
-                this.style.backgroundColor = areWheelsRotating ? '#7209b7' : '#4361ee';
+                this.style.backgroundColor = areWheelsRotating ? '#e74c3c' : '#3498db';
             });
         }
         

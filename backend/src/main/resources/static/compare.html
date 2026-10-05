@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新车参数对比 - 热门SUV车型横向对比 - 买车指南</title>
+    <meta name="description" content="选择两款热门车型，横向对比价格、级别、尺寸、轴距、动力类型、油耗电耗、零百加速与智能配置等核心参数，帮您快速锁定心仪车型。">
+    <meta name="keywords" content="新车对比,车型参数对比,SUV对比,购车对比">
+    <!-- Google AdSense 脚本 -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', sans-serif; background-color: #f5f5f5; color: #333; }
+        .navbar { background-color: #333; overflow: hidden; }
+        .navbar a { float: left; display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none; }
+        .navbar a:hover { background-color: #ddd; color: black; }
+        .navbar a.active { background-color: #3498db; color: #fff; }
+        .content { padding: 20px; max-width: 1100px; margin: 0 auto; }
+        h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; margin-bottom: 20px; }
+        .picker { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-bottom: 25px; }
+        .picker label { font-weight: bold; color: #555; }
+        .picker select { padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; min-width: 220px; }
+        .compare-table { background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; min-width: 600px; }
+        th, td { padding: 13px 15px; text-align: center; border-bottom: 1px solid #eee; font-size: 0.92rem; }
+        th { background: #2c3e50; color: #fff; }
+        td:first-child { background: #f8f9fa; font-weight: bold; color: #2c3e50; width: 140px; text-align: left; }
+        tr:hover td { background-color: #fdfdfd; }
+        tr:hover td:first-child { background-color: #f8f9fa; }
+        .diff { color: #e74c3c; font-weight: bold; }
+        .ads-container { margin: 20px auto; max-width: 1100px; padding: 10px; text-align: center; background: #fff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .tip { background: #eaf4fd; border-left: 4px solid #3498db; padding: 12px 15px; border-radius: 5px; color: #555; font-size: 0.88rem; margin-top: 20px; line-height: 1.7; }
+        footer { margin-top: 40px; background: #333; color: #ccc; text-align: center; padding: 25px 20px; font-size: 0.85rem; line-height: 1.8; }
+        footer a { color: #9eccef; text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">首页</a>
+        <a href="/#ranking">新车排行</a>
+        <a href="/compare" class="active">新车对比</a>
+        <a href="/used">二手车对比</a>
+        <a href="/used-10w">10万推荐</a>
+        <a href="/news">购车资讯</a>
+        <a href="/model">车型展厅</a>
+        <a href="/power">油电成本</a>
+        <a href="/about">关于我们</a>
+        <a href="/contact">联系我们</a>
+        <a href="/privacy">隐私政策</a>
+    </div>
+
+    <div class="content">
+        <h1>新车参数对比</h1>
+        <div class="picker">
+            <div><label>车型一：</label>
+                <select id="car-select-1"></select>
+            </div>
+            <div><label>车型二：</label>
+                <select id="car-select-2"></select>
+            </div>
+        </div>
+
+        <div class="compare-table">
+            <table id="compare-table">
+                <thead>
+                    <tr>
+                        <th>参数</th>
+                        <th id="col-1-name">车型一</th>
+                        <th id="col-2-name">车型二</th>
+                    </tr>
+                </thead>
+                <tbody id="compare-body"></tbody>
+            </table>
+        </div>
+
+        <div class="tip">
+            <strong>对比小贴士：</strong>红色加粗参数表示两款车型存在差异。若两款车价格接近，建议优先比较轴距、能耗与智能配置；家用需求可重点关注空间与舒适性配置，通勤场景则看重能耗与补能效率。
+        </div>
+
+        <!-- 广告位 -->
+        <div class="ads-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                 data-ad-slot="XXXXXXXXXX"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+
+    <footer>
+        <p><a href="/about">关于我们</a> | <a href="/contact">联系我们</a> | <a href="/privacy">隐私政策</a> | <a href="/stats">流量统计</a></p>
+        <p>买车指南 &copy; 2026 | 数据仅供参考，实际参数以厂商公布为准</p>
+    </footer>
+
+    <script>
+        const cars = [
+            { name: "极氪7X", price: "22.99-29.99万", level: "中型SUV", size: "4830×1930×1669mm", wheelbase: "2930mm", power: "纯电 后驱/四驱", consumption: "约14.5kWh/100km", accel: "4.5s", tech: "浩瀚智驾2.0/800V快充/AR-HUD" },
+            { name: "领克900", price: "30.99-36.99万", level: "中大型SUV", size: "5230×1999×1810mm", wheelbase: "3160mm", power: "插混 1.5T+电机", consumption: "亏电约6.9L/100km", accel: "5.2s", tech: "EM-P超电混动/高阶智驾/空气悬架" },
+            { name: "腾势N9", price: "38.98-44.98万", level: "大型SUV", size: "5258×2030×1830mm", wheelbase: "3125mm", power: "插混 易三方四驱", consumption: "亏电约7.2L/100km", accel: "4.9s", tech: "易三方泊车/云辇-A/天神之眼" },
+            { name: "问界M7", price: "24.98-31.98万", level: "中大型SUV", size: "5020×1945×1760mm", wheelbase: "2820mm", power: "增程 1.5T", consumption: "亏电约6.6L/100km", accel: "7.8s", tech: "华为ADS 3.0/鸿蒙座舱/零重力座椅" },
+            { name: "理想L7", price: "28.98-35.98万", level: "中大型SUV", size: "5050×1995×1750mm", wheelbase: "3005mm", power: "增程 1.5T", consumption: "亏电约7.4L/100km", accel: "5.3s", tech: "理想AD Max/魔毯空气悬架/大床模式" },
+            { name: "小鹏G9", price: "26.99-35.99万", level: "中大型SUV", size: "4891×1937×1670mm", wheelbase: "2998mm", power: "纯电 后驱/四驱", consumption: "约15.2kWh/100km", accel: "3.9s", tech: "XNGP全场景智驾/800V超快充/5D音乐座舱" },
+            { name: "蔚来ES6", price: "33.80-39.60万", level: "中型SUV", size: "4854×1995×1703mm", wheelbase: "2915mm", power: "纯电 双电机四驱", consumption: "约17.3kWh/100km", accel: "4.5s", tech: "换电服务/NOMI智能交互/NIO Pilot" },
+            { name: "唐DM-i", price: "21.98-29.98万", level: "中型SUV", size: "4870×1950×1725mm", wheelbase: "2820mm", power: "插混 1.5T", consumption: "亏电约5.9L/100km", accel: "8.5s", tech: "DM-i超混/7座布局/DiLink智能网联" },
+            { name: "汉兰达", price: "31.98-39.98万", level: "中大型SUV", size: "4965×1930×1750mm", wheelbase: "2850mm", power: "油混 2.5L", consumption: "约5.8L/100km", accel: "8.3s", tech: "丰田THS混动/TSS智行安全/保值率高" },
+            { name: "途观L Pro", price: "26.68-29.68万", level: "中型SUV", size: "4735×1859×1682mm", wheelbase: "2791mm", power: "燃油 2.0T", consumption: "约8.4L/100km", accel: "7.5s", tech: "IQ.Drive智驾/12.3寸双联屏/德系操控" }
+        ];
+
+        const rows = [
+            { label: "价格区间", key: "price" },
+            { label: "级别", key: "level" },
+            { label: "车身尺寸", key: "size" },
+            { label: "轴距", key: "wheelbase" },
+            { label: "动力类型", key: "power" },
+            { label: "能耗", key: "consumption" },
+            { label: "0-100km/h", key: "accel" },
+            { label: "智能配置", key: "tech" }
+        ];
+
+        const select1 = document.getElementById('car-select-1');
+        const select2 = document.getElementById('car-select-2');
+
+        cars.forEach((car, i) => {
+            select1.add(new Option(car.name, i));
+            select2.add(new Option(car.name, i));
+        });
+        select2.selectedIndex = 1;
+
+        function render() {
+            const c1 = cars[select1.value];
+            const c2 = cars[select2.value];
+            document.getElementById('col-1-name').textContent = c1.name;
+            document.getElementById('col-2-name').textContent = c2.name;
+            const tbody = document.getElementById('compare-body');
+            tbody.innerHTML = '';
+            rows.forEach(row => {
+                const tr = document.createElement('tr');
+                const isDiff = c1[row.key] !== c2[row.key];
+                tr.innerHTML = `
+                    <td>${row.label}</td>
+                    <td class="${isDiff ? 'diff' : ''}">${c1[row.key]}</td>
+                    <td class="${isDiff ? 'diff' : ''}">${c2[row.key]}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        select1.addEventListener('change', render);
+        select2.addEventListener('change', render);
+        render();
+    </script>
+</body>
+</html>

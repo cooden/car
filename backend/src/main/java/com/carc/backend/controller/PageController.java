@@ -35,4 +35,29 @@ public class PageController {
     public String contact() {
         return "forward:/contact.html";
     }
+
+    @GetMapping("/compare")
+    public String compare() {
+        return "forward:/compare.html";
+    }
+
+    @GetMapping("/used")
+    public String used() {
+        return "forward:/used.html";
+    }
+
+    @GetMapping("/used-10w")
+    public String used10w() {
+        return "forward:/used-10w.html";
+    }
+
+    @GetMapping("/news")
+    public String news() {
+        return "forward:/news.html";
+    }
+
+    @GetMapping("/stats")
+    public String stats() {
+        return "forward:/stats.html";
+    }
 }
