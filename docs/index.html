@@ -375,7 +375,9 @@
     </div>
 
     <!-- 自推广广告位 1 -->
-    <div class="self-ad" id="self-ad-1"></div>
+        <!--
+        <div class="self-ad" id="self-ad-1"></div>
+        -->
 
     <div class="content">
 
@@ -398,7 +400,8 @@
             <div class="timeline" id="brand-timeline"></div>
         </div>
 
-        <!-- 自推广广告位 2 -->
+        <!--
+        自推广广告位 2 / 热门导购工具 / 最新资讯 / 油电横幅（已注释，保留代码可恢复）
         <div class="self-ad" id="self-ad-2"></div>
 
         <h2 class="section-title">🛠 热门导购工具</h2>
@@ -433,13 +436,6 @@
                 <h3>降价行情</h3>
                 <p>主流车型终端优惠汇总，把握最佳购车时机。</p>
             </a>
-            <!--
-            <a class="entry-card" href="library.html">
-                <div class="entry-icon">📚</div>
-                <h3>车型库</h3>
-                <p>按级别筛选 SUV、轿车、MPV 与新能源热门车型。</p>
-            </a>
-            -->
         </div>
 
         <h2 class="section-title">📰 最新购车资讯</h2>
@@ -451,6 +447,7 @@
             <p>输入油价、电价与年行驶里程，秒算年度用车成本。</p>
             <a href="power.html">进入油电成本对比 →</a>
         </div>
+        -->
     </div>
 
     <footer>
@@ -563,7 +560,7 @@
         function renderAd(id) {
             const el = document.getElementById(id);
             if (!el) return;
-            const path = window.location.pathname.split('/').pop() || 'index.html';
+            const path = window.location.pathname.split("/").pop() || "index.html";
             const pool = adPool.filter(a => a.link !== path);
             const ad = pool[Math.floor(Math.random() * pool.length)];
             el.innerHTML = `<span class="ad-label">推荐</span><div>${ad.text} <a href="${ad.link}">${ad.linkText}</a></div>`;
@@ -618,23 +615,13 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            renderAd('self-ad-1');
-            renderAd('self-ad-2');
+            // renderAd('self-ad-1');
+            // renderAd('self-ad-2');
             renderFeatured();
             renderBrandTabs();
-
-            const newsList = document.getElementById('news-list');
-            newsData.forEach((news, index) => {
-                const card = document.createElement('div');
-                card.className = 'news-card';
-                card.innerHTML = `
-                    <span class="news-cat">${news.cat}</span>
-                    <h3><a href="news-detail.html?id=${index + 1}" style="color:#1a1a2e;text-decoration:none;" onmouseover="this.style.color='#3498db'" onmouseout="this.style.color='#1a1a2e'">${news.title}</a></h3>
-                    <p>${news.summary}</p>
-                    <div class="news-date">${news.date} · <a href="news-detail.html?id=${index + 1}" style="color:#3498db;text-decoration:none;">阅读全文 →</a></div>
-                `;
-                newsList.appendChild(card);
-            });
+            // 资讯渲染已随资讯区块注释
+            // const newsList = document.getElementById('news-list');
+            // newsData.forEach((news, index) => { ... });
         });
     </script>
 
