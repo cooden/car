@@ -7,7 +7,7 @@
     <meta name="description" content="购车落地价计算器：输入裸车价自动计算购置税、交强险、商业险与上牌费用，燃油车 10% 购置税、新能源车 2026 年起减半征收，一键算清落地总价。">
     <meta name="keywords" content="落地价计算器,购置税计算,购车费用计算,新车落地价,买车费用明细">
     <!-- Google AdSense 脚本 -->
-    <style>
+<style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Microsoft YaHei', sans-serif; background-color: #f5f5f5; color: #333; }
         .navbar { background-color: #333; overflow: hidden; }
@@ -42,11 +42,11 @@
         footer a { color: #9eccef; text-decoration: none; margin: 0 8px; }
         footer a:hover { text-decoration: underline; }
     </style>
-<style>.self-ad{background:linear-gradient(135deg,#eaf4fd,#f0f7fd);border:1px solid #bfe0f7;}.self-ad-link{display:flex;align-items:center;gap:16px;text-decoration:none;color:#333;padding:6px;}.self-ad-icon{font-size:2rem;}.self-ad-text{flex:1;text-align:left;}.self-ad-title{font-weight:bold;color:#2c3e50;font-size:1rem;}.self-ad-desc{color:#7f8c8d;font-size:.85rem;margin-top:2px;}.self-ad-cta{background:#3498db;color:#fff;padding:8px 16px;border-radius:20px;font-size:.85rem;white-space:nowrap;}@media(max-width:600px){.self-ad-link{flex-wrap:wrap;}.self-ad-cta{margin-top:6px;}}</style></head>
+<style>.self-ad{margin:20px auto;max-width:1200px;padding:16px 24px;text-align:center;background:linear-gradient(135deg,#fff 0%,#f8f9ff 100%);border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.06);border:1px solid #e8ecf4}.self-ad .ad-label{display:inline-block;font-size:.7rem;color:#95a5a6;background:#ecf0f1;padding:2px 8px;border-radius:4px;margin-bottom:6px}.self-ad a{color:#3498db;text-decoration:none;font-weight:600}</style></head>
 <body>
     <div class="navbar">
         <a href="index.html">首页</a>
-        <a href="index.html#ranking">新车排行</a>
+        <a href="index.html#history">品牌发展史</a>
         <a href="compare.html">新车对比</a>
         <a href="price.html" class="active">落地价</a>
         <a href="cost.html">养车成本</a>
@@ -56,7 +56,7 @@
         <a href="library.html">车型库</a>
         <a href="news.html">资讯</a>
         <a href="model.html">展厅</a>
-        <!-- <a href="power.html">油电成本</a> -->
+<!-- <a href="power.html">油电成本</a> -->
     </div>
 
     <div class="content">
@@ -118,11 +118,15 @@
         </div>
 
         <!-- 广告位 1 -->
-        <div class="ads-container self-ad"><a href="deals.html" class="self-ad-link"><span class="self-ad-icon">&#128201;</span><div class="self-ad-text"><div class="self-ad-title">最新降价行情汇总</div><div class="self-ad-desc">主流车型终端优惠与参考成交价</div></div><span class="self-ad-cta">查看 &rarr;</span></a></div>
+        <div class="ads-container">
+            <div class="self-ad"></div>
+        </div>
     </div>
 
     <!-- 广告位 2 -->
-    <div class="ads-container self-ad"><a href="compare.html" class="self-ad-link"><span class="self-ad-icon">&#9878;</span><div class="self-ad-text"><div class="self-ad-title">两款新车参数对比</div><div class="self-ad-desc">价格、尺寸、动力、油耗横向比拼</div></div><span class="self-ad-cta">查看 &rarr;</span></a></div>
+    <div class="ads-container" style="margin-top:0;">
+        <div class="self-ad"></div>
+    </div>
 
     <footer>
         <p><a href="about.html">关于我们</a> | <a href="contact.html">联系我们</a> | <a href="privacy.html">隐私政策</a> | <a href="stats.html">流量统计</a></p>
@@ -155,5 +159,7 @@
 
         document.addEventListener('DOMContentLoaded', calcPrice);
     </script>
-</body>
+<script>
+(function(){var p=[{t:"想知道油车电车哪个更省？",l:"power.html",a:"试试油电成本计算器 →"},{t:"买车到底要花多少钱？",l:"price.html",a:"算一下落地价 →"},{t:"养车一年要花多少？",l:"cost.html",a:"算一下养车成本 →"},{t:"10万买什么车？",l:"used-10w.html",a:"看10万推荐榜单 →"},{t:"现在买车有多少优惠？",l:"deals.html",a:"查看降价行情 →"}];var path=window.location.pathname.split("/").pop()||"index.html";var pool=p.filter(function(x){return x.l!==path;});document.querySelectorAll(".self-ad").forEach(function(el){var ad=pool[Math.floor(Math.random()*pool.length)];el.innerHTML='<span class="ad-label">推荐</span><div>'+ad.t+' <a href="'+ad.l+'">'+ad.a+'</a></div>';});})();
+</script></body>
 </html>

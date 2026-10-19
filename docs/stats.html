@@ -53,7 +53,7 @@
 <body>
     <div class="navbar">
         <a href="index.html">首页</a>
-        <a href="index.html#ranking">新车排行</a>
+        <a href="index.html#history">品牌发展史</a>
         <a href="compare.html">新车对比</a>
         <a href="price.html">落地价</a>
         <a href="cost.html">养车成本</a>
@@ -63,7 +63,7 @@
         <a href="library.html">车型库</a>
         <a href="news.html">资讯</a>
         <a href="model.html">展厅</a>
-        <!-- <a href="power.html">油电成本</a> -->
+<!-- <a href="power.html">油电成本</a> -->
     </div>
 
     <div class="content">
@@ -132,7 +132,6 @@
         async function load() {
             try {
                 const res = await fetch('/api/stats');
-                if (!res.ok) throw new Error('no backend');
                 const data = await res.json();
                 document.getElementById('total-pv').textContent = data.totalPv;
                 document.getElementById('today-pv').textContent = data.todayPv;
@@ -140,16 +139,13 @@
                 renderBar(Object.entries(data.pages || {}), document.getElementById('page-body'));
                 renderBar(Object.entries(data.todayPages || {}), document.getElementById('today-body'));
             } catch (e) {
-                document.getElementById('total-pv').textContent = '—';
-                document.getElementById('today-pv').textContent = '—';
-                document.querySelector('.cards').insertAdjacentHTML('afterend',
-                    '<div class="panel" style="border-left:4px solid #f1c40f;background:#fef9e7;"><h2 style="border-color:#f1c40f;">流量统计服务未运行</h2><p style="color:#6b5b0e;line-height:1.8;">本站流量统计功能由后端 Spring Boot 服务（<code>/api/stats</code>）提供。当前为纯静态部署（GitHub Pages），无法获取实时访问数据。<br>如需启用统计面板，请将本项目部署为 Spring Boot 应用并访问服务对应的 <code>/stats</code> 页面。</p></div>');
-                clearInterval(timer);
+                document.getElementById('total-pv').textContent = '加载失败';
+                document.getElementById('today-pv').textContent = '加载失败';
             }
         }
 
         load();
-        const timer = setInterval(load, 5000);
+        setInterval(load, 5000);
     </script>
 </body>
 </html>

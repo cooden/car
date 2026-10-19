@@ -3,237 +3,354 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>买车指南 - SUV新车排行 | 新车对比 | 二手车推荐 | 10万二手车 - 购车导购</title>
-    <meta name="description" content="买车指南网：20-50万SUV新车排行榜、热门新车参数对比、二手车对比选购、10万元以内二手车推荐榜单，以及购车资讯干货，帮您买对车不踩坑。">
-    <meta name="keywords" content="SUV排行,新车对比,二手车对比,10万二手车推荐,购车资讯,买车指南">
-    <!-- Google AdSense 脚本 -->
+    <title>买车指南 - 汽车品牌发展史 | 10万新车推荐 | 购车导购</title>
+    <meta name="description" content="买车指南网：汽车品牌发展史、10万元以内新车推荐（含纯电、插混）、落地价与养车成本计算、二手车对比选购，一站式解决选车难题。">
+    <meta name="keywords" content="汽车品牌发展史,10万新车推荐,纯电,插混,二手车对比,购车资讯,买车指南">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Microsoft YaHei', sans-serif;
-            background-color: #f5f5f5;
-            color: #333;
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: #f0f2f5;
+            color: #2c3e50;
+            line-height: 1.6;
         }
+
+        /* ===== 导航 ===== */
         .navbar {
-            background-color: #333;
-            overflow: hidden;
+            background: linear-gradient(90deg, #1a1a2e 0%, #16213e 100%);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         .navbar a {
             float: left;
             display: block;
-            color: white;
+            color: #e0e0e0;
             text-align: center;
-            padding: 14px 16px;
+            padding: 15px 18px;
             text-decoration: none;
+            font-size: 0.92rem;
+            transition: all 0.25s;
         }
-        .navbar a:hover { background-color: #ddd; color: black; }
-        .navbar a.active { background-color: #3498db; color: #fff; }
+        .navbar a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+        .navbar a.active { background: #3498db; color: #fff; }
 
+        /* ===== Hero ===== */
         .hero {
-            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: #fff;
             text-align: center;
-            padding: 60px 20px;
+            padding: 70px 20px 80px;
+            position: relative;
+            overflow: hidden;
         }
-        .hero h1 { font-size: 2.2rem; margin-bottom: 10px; }
-        .hero p { font-size: 1.05rem; opacity: 0.9; max-width: 700px; margin: 0 auto; line-height: 1.7; }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 60%);
+            animation: float 8s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-3%, -3%); }
+        }
+        .hero h1 { font-size: 2.4rem; margin-bottom: 14px; position: relative; }
+        .hero p { font-size: 1.05rem; opacity: 0.92; max-width: 720px; margin: 0 auto; position: relative; }
+        .hero-tags { margin-top: 20px; position: relative; }
+        .hero-tags span {
+            display: inline-block;
+            background: rgba(255,255,255,0.18);
+            backdrop-filter: blur(4px);
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin: 4px;
+        }
 
-        .content { padding: 20px; max-width: 1200px; margin: 0 auto; }
+        /* ===== 容器 ===== */
+        .content { padding: 30px 20px; max-width: 1200px; margin: 0 auto; }
         .section-title {
-            color: #2c3e50;
+            color: #1a1a2e;
             border-left: 5px solid #3498db;
-            padding-left: 12px;
-            margin: 40px 0 20px;
-            font-size: 1.5rem;
+            padding-left: 14px;
+            margin: 45px 0 8px;
+            font-size: 1.6rem;
+            font-weight: 700;
         }
         .section-sub {
             color: #7f8c8d;
-            margin: 0px 0 20px 17px;
-            font-size: 0.9rem;
+            margin: 0 0 24px 19px;
+            font-size: 0.92rem;
         }
 
-        /* 排行 tab */
-        .tabs { display: flex; gap: 10px; flex-wrap: wrap; margin: 0 0 18px 17px; }
-        .tab-btn { padding: 9px 20px; background: #fff; color: #555; border: 1px solid #ddd; border-radius: 20px; cursor: pointer; font-size: 0.9rem; transition: all 0.2s; }
-        .tab-btn:hover { border-color: #3498db; color: #3498db; }
-        .tab-btn.active { background: #3498db; color: #fff; border-color: #3498db; }
-
-        .ads-container {
-            margin: 20px auto;
+        /* ===== 自推广广告位 ===== */
+        .self-ad {
+            margin: 24px auto;
             max-width: 1200px;
-            padding: 10px;
+            padding: 18px 24px;
             text-align: center;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            background: linear-gradient(135deg, #fff 0%, #f8f9ff 100%);
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+            border: 1px solid #e8ecf4;
         }
+        .self-ad .ad-label {
+            display: inline-block;
+            font-size: 0.7rem;
+            color: #95a5a6;
+            background: #ecf0f1;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+        .self-ad a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .self-ad a:hover { text-decoration: underline; }
 
-        /* SUV 排行 */
-        .car-ranking {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
+        /* ===== 10万推荐精选（挪到最前）===== */
+        .featured-10w {
+            background: linear-gradient(135deg, #fef9e7 0%, #fff 100%);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+            border: 1px solid #fceabb;
         }
-        .car-card {
-            width: 260px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            padding: 15px;
-            text-align: center;
-            transition: transform 0.2s;
-        }
-        .car-card:hover { transform: translateY(-4px); }
-        .car-image {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-        .car-image.placeholder {
+        .featured-10w .sec-head {
             display: flex;
             align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #3498db, #2c3e50);
-            color: #fff;
-            font-size: 1.6rem;
-            font-weight: bold;
+            justify-content: space-between;
+            margin-bottom: 20px;
         }
-        .rank-badge {
-            display: inline-block;
-            background: #e74c3c;
-            color: #fff;
-            border-radius: 20px;
-            padding: 2px 10px;
-            font-size: 0.75rem;
-            margin-bottom: 6px;
+        .featured-10w h2 { color: #e67e22; font-size: 1.5rem; }
+        .featured-10w .more {
+            color: #e67e22;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
         }
-        .car-name { font-weight: bold; margin: 5px 0; }
-        .car-price { color: #e74c3c; font-size: 18px; font-weight: bold; }
-        .car-brand { color: #7f8c8d; font-size: 14px; }
-        .car-tags { margin-top: 8px; }
-        .car-tags span {
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+        }
+        .feat-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 18px;
+            border: 1px solid #f0e6d2;
+            transition: all 0.25s;
+            cursor: pointer;
+        }
+        .feat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(230,126,34,0.15);
+            border-color: #e67e22;
+        }
+        .feat-name { font-weight: 700; color: #2c3e50; margin-bottom: 4px; }
+        .feat-type {
             display: inline-block;
-            background: #ecf0f1;
-            color: #555;
+            font-size: 0.72rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+        .feat-type.ev { background: #e8f8f1; color: #27ae60; }
+        .feat-type.phev { background: #fff3e0; color: #e67e22; }
+        .feat-type.fuel { background: #eaf2fd; color: #2980b9; }
+        .feat-price { color: #e74c3c; font-weight: 700; font-size: 1.05rem; }
+        .feat-tags { margin-top: 8px; }
+        .feat-tags span {
+            display: inline-block;
+            background: #f5f5f5;
+            color: #7f8c8d;
             border-radius: 4px;
             padding: 2px 7px;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             margin: 2px;
         }
 
-        /* 入口卡 */
+        /* ===== 汽车品牌发展史 ===== */
+        .brand-history {
+            background: #fff;
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+        }
+        .brand-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
+        .brand-tab {
+            padding: 8px 18px;
+            background: #f5f6fa;
+            color: #555;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .brand-tab:hover { background: #eaf4fd; color: #3498db; }
+        .brand-tab.active { background: #3498db; color: #fff; }
+        .timeline { position: relative; padding-left: 28px; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #3498db, #9b59b6);
+        }
+        .tl-item { position: relative; margin-bottom: 20px; }
+        .tl-item::before {
+            content: '';
+            position: absolute;
+            left: -25px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #3498db;
+            border: 2px solid #fff;
+            box-shadow: 0 0 0 2px #3498db;
+        }
+        .tl-year {
+            font-weight: 700;
+            color: #3498db;
+            font-size: 0.95rem;
+        }
+        .tl-text { color: #555; font-size: 0.9rem; margin-top: 2px; }
+        .brand-intro {
+            background: #f8f9ff;
+            border-left: 4px solid #3498db;
+            padding: 14px 18px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            color: #555;
+            font-size: 0.92rem;
+            line-height: 1.8;
+        }
+
+        /* ===== 入口卡 ===== */
         .entry-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 18px;
         }
         .entry-card {
-            flex: 1;
-            min-width: 240px;
-            max-width: 340px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            padding: 25px;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+            padding: 26px 22px;
             text-align: center;
             text-decoration: none;
             color: #333;
-            transition: transform 0.2s;
+            transition: all 0.25s;
+            border: 1px solid #eef0f4;
         }
-        .entry-card:hover { transform: translateY(-4px); }
+        .entry-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(52,152,219,0.18);
+            border-color: #3498db;
+        }
         .entry-icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 15px;
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 16px;
             border-radius: 50%;
-            background: #3498db;
+            background: linear-gradient(135deg, #3498db, #2c3e50);
             color: #fff;
             font-size: 1.8rem;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        .entry-card h3 { color: #2c3e50; margin-bottom: 8px; }
-        .entry-card p { color: #7f8c8d; font-size: 0.9rem; line-height: 1.6; }
+        .entry-card h3 { color: #1a1a2e; margin-bottom: 8px; font-size: 1.1rem; }
+        .entry-card p { color: #7f8c8d; font-size: 0.85rem; line-height: 1.6; }
 
-        /* 资讯 */
+        /* ===== 资讯 ===== */
         .news-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 18px;
         }
         .news-card {
-            flex: 1;
-            min-width: 240px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            padding: 18px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            padding: 20px;
+            transition: all 0.2s;
         }
+        .news-card:hover { box-shadow: 0 6px 18px rgba(0,0,0,0.1); transform: translateY(-2px); }
         .news-cat {
             display: inline-block;
             background: #eaf4fd;
             color: #2980b9;
             border-radius: 4px;
-            padding: 2px 8px;
+            padding: 3px 10px;
             font-size: 0.75rem;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
-        .news-card h3 { font-size: 1rem; color: #2c3e50; margin-bottom: 8px; line-height: 1.5; }
-        .news-card p { color: #7f8c8d; font-size: 0.85rem; line-height: 1.6; }
-        .news-date { color: #b0b9be; font-size: 0.75rem; margin-top: 10px; }
+        .news-card h3 { font-size: 1rem; color: #1a1a2e; margin-bottom: 10px; line-height: 1.5; }
+        .news-card p { color: #7f8c8d; font-size: 0.85rem; line-height: 1.7; }
+        .news-date { color: #b0b9be; font-size: 0.75rem; margin-top: 12px; }
         .more-link {
             display: inline-block;
-            margin-top: 15px;
+            margin-top: 18px;
             color: #3498db;
             text-decoration: none;
             font-size: 0.9rem;
+            font-weight: 600;
         }
         .more-link:hover { text-decoration: underline; }
 
-        /* 成本站横幅 */
+        /* ===== 成本站横幅 ===== */
         .cost-banner {
             background: linear-gradient(135deg, #16a085 0%, #27ae60 100%);
-            border-radius: 10px;
+            border-radius: 14px;
             color: #fff;
-            padding: 30px;
+            padding: 36px;
             text-align: center;
             margin-top: 40px;
         }
         .cost-banner h3 { font-size: 1.4rem; margin-bottom: 10px; }
-        .cost-banner p { opacity: 0.95; margin-bottom: 15px; }
+        .cost-banner p { opacity: 0.95; margin-bottom: 18px; }
         .cost-banner a {
             display: inline-block;
             background: #fff;
             color: #16a085;
-            padding: 10px 26px;
+            padding: 11px 28px;
             border-radius: 25px;
             text-decoration: none;
             font-weight: bold;
+            transition: all 0.2s;
         }
-        .cost-banner a:hover { background: #f0f0f0; }
+        .cost-banner a:hover { background: #f0f0f0; transform: translateY(-2px); }
 
         footer {
-            margin-top: 40px;
-            background: #333;
-            color: #ccc;
+            margin-top: 50px;
+            background: #1a1a2e;
+            color: #b0b9be;
             text-align: center;
-            padding: 25px 20px;
+            padding: 30px 20px;
             font-size: 0.85rem;
-            line-height: 1.8;
+            line-height: 1.9;
         }
         footer a { color: #9eccef; text-decoration: none; margin: 0 8px; }
         footer a:hover { text-decoration: underline; }
     </style>
-<style>.self-ad{background:linear-gradient(135deg,#eaf4fd,#f0f7fd);border:1px solid #bfe0f7;}.self-ad-link{display:flex;align-items:center;gap:16px;text-decoration:none;color:#333;padding:6px;}.self-ad-icon{font-size:2rem;}.self-ad-text{flex:1;text-align:left;}.self-ad-title{font-weight:bold;color:#2c3e50;font-size:1rem;}.self-ad-desc{color:#7f8c8d;font-size:.85rem;margin-top:2px;}.self-ad-cta{background:#3498db;color:#fff;padding:8px 16px;border-radius:20px;font-size:.85rem;white-space:nowrap;}@media(max-width:600px){.self-ad-link{flex-wrap:wrap;}.self-ad-cta{margin-top:6px;}}</style></head>
+</head>
 <body>
     <div class="navbar">
         <a href="index.html" class="active">首页</a>
-        <a href="index.html#ranking">新车排行</a>
+        <a href="index.html#history">品牌发展史</a>
         <a href="compare.html">新车对比</a>
         <a href="price.html">落地价</a>
         <a href="cost.html">养车成本</a>
@@ -243,85 +360,97 @@
         <a href="library.html">车型库</a>
         <a href="news.html">资讯</a>
         <a href="model.html">展厅</a>
-        <!-- <a href="power.html">油电成本</a> -->
+<!-- <a href="power.html">油电成本</a> -->
     </div>
 
     <div class="hero">
-        <h1>买车指南 - 帮您买对车，不踩坑</h1>
-        <p>聚合 SUV、轿车与新能源热门新车排行、新车参数对比、落地价与养车成本计算、二手车对比选购、10 万元以内二手车推荐、降价行情与购车资讯干货，一站式解决选车难题。</p>
+        <h1>买车指南 · 帮您买对车，不踩坑</h1>
+        <p>聚合汽车品牌发展史、10 万元以内新车推荐（纯电 / 插混 / 燃油）、落地价与养车成本计算、二手车对比选购与购车资讯干货，一站式解决选车难题。</p>
+        <div class="hero-tags">
+            <span>🚗 10万新车推荐</span>
+            <span>⚡ 纯电 / 插混</span>
+            <span>📜 品牌发展史</span>
+            <span>💰 落地价计算</span>
+        </div>
     </div>
 
-    <!-- 广告位 1：首屏下方横幅 -->
-    <div class="ads-container self-ad"><a href="deals.html" class="self-ad-link"><span class="self-ad-icon">&#128201;</span><div class="self-ad-text"><div class="self-ad-title">最新降价行情汇总</div><div class="self-ad-desc">主流车型终端优惠与参考成交价</div></div><span class="self-ad-cta">查看 &rarr;</span></a></div>
+    <!-- 自推广广告位 1 -->
+    <div class="self-ad" id="self-ad-1"></div>
 
     <div class="content">
-        <h2 class="section-title" id="ranking">热门新车排行榜</h2>
-        <div class="tabs">
-            <button class="tab-btn active" onclick="switchRank('suv', this)">SUV 榜</button>
-            <button class="tab-btn" onclick="switchRank('sedan', this)">轿车榜</button>
-            <button class="tab-btn" onclick="switchRank('ev', this)">新能源榜</button>
-        </div>
-        <p class="section-sub">综合销量、口碑与性价比整理的参考榜单，排名不分先后，点击「新车对比」可横向对比参数。</p>
-        <div class="car-ranking" id="car-ranking-list">
-            <!-- 车型卡片将通过JavaScript动态加载 -->
+
+        <!-- ===== 10万推荐精选（挪到最前）===== -->
+        <div class="featured-10w">
+            <div class="sec-head">
+                <h2>🏆 10万以内新车推荐</h2>
+                <a href="used-10w.html" class="more">查看完整榜单 →</a>
+            </div>
+            <p class="section-sub" style="margin-left:0;">精选 10 万元以内高性价比车型，含纯电、插混与燃油，覆盖代步、家用与通勤场景。</p>
+            <div class="featured-grid" id="featured-10w"></div>
         </div>
 
-        <h2 class="section-title">热门导购工具</h2>
+        <!-- ===== 汽车品牌发展史 ===== -->
+        <h2 class="section-title" id="history">📜 汽车品牌发展史</h2>
+        <p class="section-sub">从创立到崛起，快速了解主流汽车品牌的关键里程碑与技术路线。</p>
+        <div class="brand-history">
+            <div class="brand-tabs" id="brand-tabs"></div>
+            <div class="brand-intro" id="brand-intro"></div>
+            <div class="timeline" id="brand-timeline"></div>
+        </div>
+
+        <!-- 自推广广告位 2 -->
+        <div class="self-ad" id="self-ad-2"></div>
+
+        <h2 class="section-title">🛠 热门导购工具</h2>
         <div class="entry-grid">
-            <a class="entry-card" href="compare.html">
-                <div class="entry-icon">⚖</div>
-                <h3>新车对比</h3>
-                <p>选择两款心仪车型，横向对比价格、尺寸、动力、油耗、智能配置等核心参数。</p>
-            </a>
-            <a class="entry-card" href="used.html">
-                <div class="entry-icon">🚗</div>
-                <h3>二手车对比</h3>
-                <p>按预算、年份、里程筛选二手车源，支持两两对比，看保值率与参考价。</p>
-            </a>
             <a class="entry-card" href="used-10w.html">
                 <div class="entry-icon">🏆</div>
-                <h3>10万二手车推荐</h3>
-                <p>预算 10 万以内高性价比二手车榜单，附亮点标签与选购建议。</p>
+                <h3>10万推荐</h3>
+                <p>10 万元以内高性价比新车榜单，含纯电、插混与燃油车型。</p>
             </a>
             <a class="entry-card" href="price.html">
                 <div class="entry-icon">💰</div>
                 <h3>落地价计算</h3>
-                <p>裸车价 + 购置税 + 保险 + 上牌，一键算清新车落地总价，拒绝隐性收费。</p>
+                <p>裸车价 + 购置税 + 保险 + 上牌，一键算清新车落地总价。</p>
             </a>
             <a class="entry-card" href="cost.html">
-                <div class="entry-icon">🛠</div>
-                <h3>养车成本计算</h3>
-                <p>油费电费、保险、保养、停车加起来，算清养车一年到底花多少钱。</p>
+                <div class="entry-icon">⚡</div>
+                <h3>养车成本</h3>
+                <p>油费电费、保险、保养加起来，算清养车一年花多少钱。</p>
+            </a>
+            <a class="entry-card" href="compare.html">
+                <div class="entry-icon">⚖</div>
+                <h3>新车对比</h3>
+                <p>两款车型横向对比价格、尺寸、动力、能耗等核心参数。</p>
+            </a>
+            <a class="entry-card" href="used.html">
+                <div class="entry-icon">🚗</div>
+                <h3>二手车对比</h3>
+                <p>按预算、年份、里程筛选二手车源，支持两两对比。</p>
             </a>
             <a class="entry-card" href="deals.html">
                 <div class="entry-icon">📉</div>
                 <h3>降价行情</h3>
-                <p>汇总主流车型最新终端优惠与参考成交价，把握最佳购车时机。</p>
+                <p>主流车型终端优惠汇总，把握最佳购车时机。</p>
             </a>
+            <!--
             <a class="entry-card" href="library.html">
                 <div class="entry-icon">📚</div>
-                <h3>热门车型库</h3>
-                <p>按级别快速筛选 SUV、轿车、MPV 与新能源热门车型，参数价格一览。</p>
+                <h3>车型库</h3>
+                <p>按级别筛选 SUV、轿车、MPV 与新能源热门车型。</p>
             </a>
+            -->
         </div>
 
-        <!-- 广告位 2：中部 -->
-        <div class="ads-container self-ad"><a href="library.html" class="self-ad-link"><span class="self-ad-icon">&#128218;</span><div class="self-ad-text"><div class="self-ad-title">热门车型库</div><div class="self-ad-desc">SUV/轿车/MPV/新能源 参数价格一览</div></div><span class="self-ad-cta">查看 &rarr;</span></a></div>
-
-        <h2 class="section-title">最新购车资讯</h2>
-        <div class="news-grid" id="news-list">
-            <!-- 资讯卡片将通过JavaScript动态加载 -->
-        </div>
+        <h2 class="section-title">📰 最新购车资讯</h2>
+        <div class="news-grid" id="news-list"></div>
         <a class="more-link" href="news.html">查看全部资讯 →</a>
 
         <div class="cost-banner">
             <h3>油车电车，哪个更省钱？</h3>
-            <p>输入油价、电价与年行驶里程，秒算年度用车成本，还能查看常见车型能耗数据。</p>
+            <p>输入油价、电价与年行驶里程，秒算年度用车成本。</p>
             <a href="power.html">进入油电成本对比 →</a>
         </div>
-
-        <!-- 广告位 3：底部 -->
-        <div class="ads-container self-ad"><a href="library.html" class="self-ad-link"><span class="self-ad-icon">&#128218;</span><div class="self-ad-text"><div class="self-ad-title">热门车型库</div><div class="self-ad-desc">SUV/轿车/MPV/新能源 参数价格一览</div></div><span class="self-ad-cta">查看 &rarr;</span></a></div>
     </div>
 
     <footer>
@@ -330,99 +459,198 @@
     </footer>
 
     <script>
-        const carData = [
-            { "品牌": "吉利", "子品牌": "极氪", "车型": "极氪7X", "最低配车型": "2025款 后驱智驾版75kWh", "官方指导价": "22.99万", "image": "极氪mix.jpg", "tags": ["纯电", "智驾", "800V快充"] },
-            { "品牌": "吉利", "子品牌": "吉利", "车型": "领克900", "最低配车型": "2025款 1.5T Halo", "官方指导价": "30.99万", "image": "900.png", "tags": ["插混", "大6座", "旗舰SUV"] },
-            { "品牌": "比亚迪", "子品牌": "腾势", "车型": "腾势N9", "最低配车型": "2025款 易三方插混1300尊荣型", "官方指导价": "38.98万", "image": "n9.png", "tags": ["插混", "易三方", "云辇-A"] },
-            { "品牌": "AITO", "子品牌": "问界", "车型": "问界M7", "最低配车型": "2025款 智驾版后驱", "官方指导价": "24.98万", "image": "", "tags": ["增程", "华为智驾", "大空间"] },
-            { "品牌": "理想", "子品牌": "理想", "车型": "理想L7", "最低配车型": "2025款 Pro", "官方指导价": "28.98万", "image": "", "tags": ["增程", "家用", "舒适"] },
-            { "品牌": "小鹏", "子品牌": "小鹏", "车型": "小鹏G9", "最低配车型": "2025款 570 Pro", "官方指导价": "26.99万", "image": "", "tags": ["纯电", "800V", "智驾"] },
-            { "品牌": "蔚来", "子品牌": "蔚来", "车型": "蔚来ES6", "最低配车型": "2025款 75kWh", "官方指导价": "33.80万", "image": "", "tags": ["纯电", "换电", "服务"] },
-            { "品牌": "比亚迪", "子品牌": "比亚迪", "车型": "唐DM-i", "最低配车型": "2025款 荣耀版 112KM尊贵型", "官方指导价": "21.98万", "image": "", "tags": ["插混", "7座", "性价比"] },
-            { "品牌": "丰田", "子品牌": "丰田", "车型": "汉兰达", "最低配车型": "2024款 双擎 2.5L 四驱豪华版", "官方指导价": "31.98万", "image": "", "tags": ["油混", "保值", "耐用"] },
-            { "品牌": "大众", "子品牌": "大众", "车型": "途观L Pro", "最低配车型": "2025款 380TSI 四驱智驾版", "官方指导价": "26.68万", "image": "", "tags": ["燃油", "德系", "操控"] }
+        // ===== 10万推荐精选数据 =====
+        const featuredCars = [
+            { name: "比亚迪秦PLUS DM-i", type: "phev", typeLabel: "插混", price: "9.98万起", tags: ["亏电4L", "绿牌", "热销"] },
+            { name: "比亚迪海豚", type: "ev", typeLabel: "纯电", price: "9.98万起", tags: ["刀片电池", "好开好停", "城市代步"] },
+            { name: "五菱缤果", type: "ev", typeLabel: "纯电", price: "5.98万起", tags: ["亲民", "颜值高", "通勤"] },
+            { name: "吉利银河L6", type: "phev", typeLabel: "插混", price: "10.58万起", tags: ["雷神混动", "长续航", "智能"] },
+            { name: "长安深蓝SL03", type: "ev", typeLabel: "纯电", price: "11.99万起", tags: ["后驱", "颜值", "性价比"] },
+            { name: "丰田卡罗拉", type: "fuel", typeLabel: "燃油", price: "10.86万起", tags: ["皮实耐用", "保值", "油耗低"] }
         ];
 
-        const sedanData = [
-            { "品牌": "比亚迪", "子品牌": "比亚迪", "车型": "秦PLUS DM-i", "最低配车型": "2025款 插混 120KM 领先型", "官方指导价": "9.98万", "image": "", "tags": ["插混", "热销", "免税"] },
-            { "品牌": "日产", "子品牌": "日产", "车型": "轩逸", "最低配车型": "2024款 1.6L CVT 舒适版", "官方指导价": "10.86万", "image": "", "tags": ["省油", "舒适", "保有量大"] },
-            { "品牌": "大众", "子品牌": "大众", "车型": "朗逸", "最低配车型": "2025款 1.5L 自动风尚版", "官方指导价": "12.09万", "image": "", "tags": ["德系", "空间", "销量"] },
-            { "品牌": "丰田", "子品牌": "丰田", "车型": "卡罗拉", "最低配车型": "2024款 1.2T 精英版", "官方指导价": "12.88万", "image": "", "tags": ["耐用", "低油耗", "口碑"] },
-            { "品牌": "大众", "子品牌": "大众", "车型": "速腾", "最低配车型": "2025款 200TSI 超越版", "官方指导价": "13.99万", "image": "", "tags": ["操控", "质感", "A+级"] },
-            { "品牌": "比亚迪", "子品牌": "比亚迪", "车型": "汉DM-i", "最低配车型": "2025款 125KM 精英型", "官方指导价": "16.98万", "image": "", "tags": ["插混", "中大型", "豪华"] },
-            { "品牌": "丰田", "子品牌": "丰田", "车型": "凯美瑞", "最低配车型": "2025款 2.0G 豪华版", "官方指导价": "17.98万", "image": "", "tags": ["保值", "舒适", "口碑"] },
-            { "品牌": "本田", "子品牌": "本田", "车型": "雅阁", "最低配车型": "2025款 260TURBO 豪华版", "官方指导价": "17.98万", "image": "", "tags": ["运动", "空间", "操控"] },
-            { "品牌": "大众", "子品牌": "大众", "车型": "帕萨特", "最低配车型": "2025款 330TSI 星辉版", "官方指导价": "18.19万", "image": "", "tags": ["商务", "空间", "德系"] },
-            { "品牌": "大众", "子品牌": "大众", "车型": "迈腾", "最低配车型": "2025款 330TSI 领先版", "官方指导价": "19.99万", "image": "", "tags": ["商务", "质感", "动力"] }
-        ];
-
-        const evData = [
-            { "品牌": "特斯拉", "子品牌": "特斯拉", "车型": "Model Y", "最低配车型": "2025款 后轮驱动版", "官方指导价": "26.35万", "image": "", "tags": ["纯电", "销量王", "超充"] },
-            { "品牌": "小米", "子品牌": "小米", "车型": "小米SU7", "最低配车型": "2025款 后驱标准版", "官方指导价": "21.59万", "image": "", "tags": ["纯电", "颜值", "生态"] },
-            { "品牌": "特斯拉", "子品牌": "特斯拉", "车型": "Model 3", "最低配车型": "2025款 后轮驱动版", "官方指导价": "23.55万", "image": "", "tags": ["纯电", "操控", "续航"] },
-            { "品牌": "比亚迪", "子品牌": "比亚迪", "车型": "海豹", "最低配车型": "2025款 后驱 荣耀版", "官方指导价": "17.98万", "image": "", "tags": ["纯电", "平台", "性价比"] },
-            { "品牌": "比亚迪", "子品牌": "比亚迪", "车型": "汉EV", "最低配车型": "2025款 506KM 尊贵型", "官方指导价": "21.98万", "image": "", "tags": ["纯电", "豪华", "刀片电池"] },
-            { "品牌": "理想", "子品牌": "理想", "车型": "理想L6", "最低配车型": "2025款 Pro", "官方指导价": "24.98万", "image": "", "tags": ["增程", "5座", "配置高"] },
-            { "品牌": "极氪", "子品牌": "极氪", "车型": "极氪001", "最低配车型": "2025款 WE版 100kWh", "官方指导价": "26.90万", "image": "", "tags": ["纯电", "猎装", "800V"] },
-            { "品牌": "小鹏", "子品牌": "小鹏", "车型": "小鹏P7+", "最低配车型": "2025款 长续航版", "官方指导价": "19.99万", "image": "", "tags": ["纯电", "智驾", "800V"] },
-            { "品牌": "智己", "子品牌": "智己", "车型": "智己L6", "最低配车型": "2025款 Max 标准版", "官方指导价": "21.99万", "image": "", "tags": ["纯电", "后轮转向", "800V"] },
-            { "品牌": "蔚来", "子品牌": "蔚来", "车型": "蔚来ET5", "最低配车型": "2025款 75kWh", "官方指导价": "29.80万", "image": "", "tags": ["纯电", "换电", "服务"] }
-        ];
-
-        const rankData = { suv: carData, sedan: sedanData, ev: evData };
+        // ===== 汽车品牌发展史数据 =====
+        const brandHistory = {
+            byd: {
+                name: "比亚迪",
+                intro: "1995 年从电池制造起家，2003 年跨界造车，2008 年推出全球首款量产插混 F3DM，2021 年 DM-i 超级混动爆发，2022 年登顶中国乘用车销量冠军，是全球新能源汽车的领跑者。",
+                timeline: [
+                    { year: "1995", text: "王传福创立比亚迪，专注二次充电电池制造" },
+                    { year: "2003", text: "收购西安秦川汽车，正式进入汽车行业" },
+                    { year: "2008", text: "推出全球首款量产插电混动车 F3DM" },
+                    { year: "2020", text: "发布刀片电池，针刺试验引领安全新标准" },
+                    { year: "2021", text: "DM-i 超级混动发布，亏电油耗低至 3.8L" },
+                    { year: "2022", text: "停产纯燃油车，全面转型新能源，年销量 186 万辆" },
+                    { year: "2024", text: "年销量突破 427 万辆，蝉联全球新能源销冠" }
+                ]
+            },
+            tesla: {
+                name: "特斯拉",
+                intro: "2003 年创立于美国硅谷，以纯电动+智能化颠覆汽车行业。Roadster 证明电车也能快，Model 3/Y 走向大众，FSD 与超充网络构建护城河，是全球市值最高的车企。",
+                timeline: [
+                    { year: "2003", text: "马丁·艾伯哈德与马克·塔彭宁创立特斯拉" },
+                    { year: "2008", text: "交付 Roadster，首款量产纯电跑车" },
+                    { year: "2012", text: "Model S 上市，开启高端纯电轿车时代" },
+                    { year: "2017", text: "Model 3 量产，开启电动化普及浪潮" },
+                    { year: "2020", text: "Model Y 上市，迅速成为全球最畅销电动车" },
+                    { year: "2023", text: "全球交付 181 万辆，Cybertruck 开始交付" }
+                ]
+            },
+            geely: {
+                name: "吉利",
+                intro: "1986 年从冰箱配件起步，1997 年进军汽车，2010 年收购沃尔沃成为中国车企国际化标杆。如今旗下拥有吉利、领克、极氪、几何等品牌，覆盖燃油、混动、纯电全谱系。",
+                timeline: [
+                    { year: "1986", text: "李书福创立吉利，生产冰箱配件" },
+                    { year: "1997", text: "进入汽车行业，造老百姓买得起的好车" },
+                    { year: "2010", text: "18 亿美元收购沃尔沃轿车 100% 股权" },
+                    { year: "2017", text: "领克品牌发布，冲击高端市场" },
+                    { year: "2021", text: "极氪品牌成立，专注高端纯电" },
+                    { year: "2024", text: "极氪 001 FR 交付，吉利新能源转型加速" }
+                ]
+            },
+            toyota: {
+                name: "丰田",
+                intro: "1937 年从织布机业务延伸到汽车，以精益生产方式（TPS）闻名全球。1997 年普锐斯开创混动时代，卡罗拉成为全球销量冠军，是全球最大的汽车制造商之一。",
+                timeline: [
+                    { year: "1937", text: "丰田汽车工业株式会社正式成立" },
+                    { year: "1966", text: "卡罗拉上市，累计销量突破 5000 万辆" },
+                    { year: "1989", text: "雷克萨斯品牌发布，进军豪华车市场" },
+                    { year: "1997", text: "普锐斯上市，全球首款量产混合动力车" },
+                    { year: "2008", text: "超越通用，成为全球销量第一车企" },
+                    { year: "2022", text: "bZ4X 上市，加速纯电转型" }
+                ]
+            },
+            volkswagen: {
+                name: "大众",
+                intro: "1937 年由德国政府主导创立，甲壳虫成为国民车象征。高尔夫开创紧凑级两厢车时代，在中国市场深耕多年，是燃油车时代的霸主，目前正向电动化（MEB 平台）转型。",
+                timeline: [
+                    { year: "1937", text: "大众汽车公司成立，推出甲壳虫" },
+                    { year: "1974", text: "高尔夫上市，成为两厢车标杆" },
+                    { year: "1985", text: "与上汽合资，桑塔纳进入中国" },
+                    { year: "1991", text: "一汽大众成立，捷达成为国民家轿" },
+                    { year: "2015", text: "排放门事件爆发，加速电动化转型" },
+                    { year: "2020", text: "ID.3 上市，MEB 纯电平台落地" }
+                ]
+            },
+            nio: {
+                name: "蔚来",
+                intro: "2014 年创立，以换电模式与高端服务切入新能源市场。ES8 打响品牌，ET5 走量，NIO Power 补能网络与 NIO House 用户社区构建差异化优势，是中国高端纯电代表。",
+                timeline: [
+                    { year: "2014", text: "李斌创立蔚来，定位高端智能电动车" },
+                    { year: "2018", text: "纽交所上市，ES8 正式交付" },
+                    { year: "2019", text: "推出换电体系，NIO Power 上线" },
+                    { year: "2022", text: "ET5/ET7 交付，补齐轿车产品线" },
+                    { year: "2024", text: "换电站突破 2500 座，乐道品牌发布" }
+                ]
+            }
+        };
 
         const newsData = [
-            { "cat": "导购", "title": "家用第一台 SUV 怎么选？燃油、插混、纯电一文讲透", "summary": "从用车场景、补能条件到用车成本，手把手教你确定动力类型，再谈具体车型。", "date": "2026-09-28" },
-            { "cat": "行情", "title": "金九银十购车优惠季，经销商终端行情汇总", "summary": "多家主流品牌终端优惠幅度盘点，什么时候出手最划算？", "date": "2026-09-22" },
-            { "cat": "二手车", "title": "二手车避坑指南：调表车、泡水车如何一眼识别", "summary": "查验维保记录、观察螺丝痕迹、闻内饰气味，几个实用技巧降低踩坑概率。", "date": "2026-09-15" },
-            { "cat": "新能源", "title": "800V 高压平台能带来什么？充电速度实测对比", "summary": "同样补能 10 分钟，400V 与 800V 平台差距有多大？我们用数据说话。", "date": "2026-09-08" }
+            { cat: "导购", title: "10万预算买纯电还是插混？一篇讲透优缺点", summary: "从补能条件、用车成本、保值率三个维度，帮你确定最适合的动力类型。", date: "2026-10-01" },
+            { cat: "品牌", title: "比亚迪 30 年：从电池厂到全球新能源销冠", summary: "复盘比亚迪关键技术节点，看中国车企如何实现弯道超车。", date: "2026-09-25" },
+            { cat: "行情", title: "金九银十购车优惠季，终端行情汇总", summary: "主流品牌终端优惠幅度盘点，什么时候出手最划算？", date: "2026-09-20" },
+            { cat: "二手车", title: "二手新能源车能买吗？电池衰减如何评估", summary: "查验电池健康度、查维保记录，几个技巧降低踩坑概率。", date: "2026-09-12" }
         ];
 
-        function renderRanking(key) {
-            const carRankingList = document.getElementById('car-ranking-list');
-            carRankingList.innerHTML = '';
-            rankData[key].forEach((car, index) => {
-                const carCard = document.createElement('div');
-                carCard.classList.add('car-card');
-                const imageHtml = car.image
-                    ? `<img src="${car.image}" alt="${car.车型}" class="car-image">`
-                    : `<div class="car-image placeholder">${car.车型.slice(0, 2)}</div>`;
-                const tagsHtml = car.tags.map(t => `<span>${t}</span>`).join('');
-                carCard.innerHTML = `
-                    <span class="rank-badge">TOP ${index + 1}</span>
-                    ${imageHtml}
-                    <div class="car-name">${car.车型}</div>
-                    <div class="car-brand">${car.品牌} - ${car.子品牌}</div>
-                    <div class="car-price">${car.官方指导价}起</div>
-                    <div class="car-tags">${tagsHtml}</div>
-                    <p style="color:#95a5a6;font-size:0.78rem;margin-top:8px;">${car.最低配车型}</p>
+        // ===== 自推广广告 =====
+        const adPool = [
+            { text: "📊 想知道油车电车哪个更省？", link: "power.html", linkText: "试试油电成本计算器 →" },
+            { text: "💰 买车到底要花多少钱？", link: "price.html", linkText: "算一下落地价 →" },
+            { text: "⚡ 养车一年要花多少？", link: "cost.html", linkText: "算一下养车成本 →" },
+            { text: "🏆 10万买什么车？", link: "used-10w.html", linkText: "看10万推荐榜单 →" },
+            { text: "📉 现在买车有多少优惠？", link: "deals.html", linkText: "查看降价行情 →" }
+        ];
+        function renderAd(id) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            const path = window.location.pathname.split('/').pop() || 'index.html';
+            const pool = adPool.filter(a => a.link !== path);
+            const ad = pool[Math.floor(Math.random() * pool.length)];
+            el.innerHTML = `<span class="ad-label">推荐</span><div>${ad.text} <a href="${ad.link}">${ad.linkText}</a></div>`;
+        }
+
+        // ===== 渲染 10万精选 =====
+        function renderFeatured() {
+            const grid = document.getElementById('featured-10w');
+            featuredCars.forEach(car => {
+                const tags = car.tags.map(t => `<span>${t}</span>`).join('');
+                const card = document.createElement('div');
+                card.className = 'feat-card';
+                card.innerHTML = `
+                    <div class="feat-name">${car.name}</div>
+                    <span class="feat-type ${car.type}">${car.typeLabel}</span>
+                    <div class="feat-price">${car.price}</div>
+                    <div class="feat-tags">${tags}</div>
                 `;
-                carRankingList.appendChild(carCard);
+                grid.appendChild(card);
             });
         }
 
-        function switchRank(key, btn) {
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        // ===== 渲染品牌发展史 =====
+        function renderBrandTabs() {
+            const tabs = document.getElementById('brand-tabs');
+            const keys = Object.keys(brandHistory);
+            keys.forEach((key, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'brand-tab' + (i === 0 ? ' active' : '');
+                btn.textContent = brandHistory[key].name;
+                btn.onclick = () => selectBrand(key, btn);
+                tabs.appendChild(btn);
+            });
+            renderBrand(keys[0]);
+        }
+        function selectBrand(key, btn) {
+            document.querySelectorAll('.brand-tab').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            renderRanking(key);
+            renderBrand(key);
+        }
+        function renderBrand(key) {
+            const b = brandHistory[key];
+            document.getElementById('brand-intro').textContent = b.intro;
+            const tl = document.getElementById('brand-timeline');
+            tl.innerHTML = '';
+            b.timeline.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'tl-item';
+                div.innerHTML = `<div class="tl-year">${item.year}</div><div class="tl-text">${item.text}</div>`;
+                tl.appendChild(div);
+            });
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            renderRanking('suv');
+            renderAd('self-ad-1');
+            renderAd('self-ad-2');
+            renderFeatured();
+            renderBrandTabs();
 
             const newsList = document.getElementById('news-list');
             newsData.forEach((news, index) => {
-                const newsCard = document.createElement('div');
-                newsCard.classList.add('news-card');
-                newsCard.innerHTML = `
+                const card = document.createElement('div');
+                card.className = 'news-card';
+                card.innerHTML = `
                     <span class="news-cat">${news.cat}</span>
-                    <h3><a href="news-detail.html?id=${index + 1}" style="color:#2c3e50;text-decoration:none;" onmouseover="this.style.color='#3498db'" onmouseout="this.style.color='#2c3e50'">${news.title}</a></h3>
+                    <h3><a href="news-detail.html?id=${index + 1}" style="color:#1a1a2e;text-decoration:none;" onmouseover="this.style.color='#3498db'" onmouseout="this.style.color='#1a1a2e'">${news.title}</a></h3>
                     <p>${news.summary}</p>
                     <div class="news-date">${news.date} · <a href="news-detail.html?id=${index + 1}" style="color:#3498db;text-decoration:none;">阅读全文 →</a></div>
                 `;
-                newsList.appendChild(newsCard);
+                newsList.appendChild(card);
             });
         });
     </script>
+
+    <!--
+    ===== 以下为「新车排行榜」原始代码（已停用，保留以便恢复）=====
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchRank('suv', this)">SUV 榜</button>
+        <button class="tab-btn" onclick="switchRank('sedan', this)">轿车榜</button>
+        <button class="tab-btn" onclick="switchRank('ev', this)">新能源榜</button>
+    </div>
+    const carData = [ ...SUV数据... ];
+    const sedanData = [ ...轿车数据... ];
+    const evData = [ ...新能源数据... ];
+    function renderRanking(key) { ... }
+    function switchRank(key, btn) { ... }
+    ===== 新车排行榜代码结束 =====
+    -->
 </body>
 </html>
