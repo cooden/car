@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -58,10 +58,8 @@
     <div class="navbar">
         <a href="/">首页</a>
         <a href="/#history">品牌发展史</a>
-        <a href="/compare">新车对比</a>
         <a href="/price">落地价</a>
         <a href="/cost">养车成本</a>
-        <a href="/used">二手车</a>
         <a href="/used-10w">推荐</a>
         <a href="/deals">降价行情</a>
         <a href="/library">车型库</a>
@@ -118,6 +116,6 @@
         });
     </script>
 <script>
-(function(){var p=[{t:"想知道油车电车哪个更省？",l:"/power",a:"试试油电成本计算器 →"},{t:"买车到底要花多少钱？",l:"/price",a:"算一下落地价 →"},{t:"养车一年要花多少？",l:"/cost",a:"算一下养车成本 →"},{t:"10万买什么车？",l:"/used-10w",a:"看10万推荐榜单 →"},{t:"现在买车有多少优惠？",l:"/deals",a:"查看降价行情 →"}];var path=window.location.pathname;var pool=p.filter(function(x){return x.l!==path;});document.querySelectorAll(".self-ad").forEach(function(el){var ad=pool[Math.floor(Math.random()*pool.length)];el.innerHTML='<span class="ad-label">推荐</span><div>'+ad.t+' <a href="'+ad.l+'">'+ad.a+'</a></div>';});})();
+(function(){var p=[{t:"想知道油车电车哪个更省？",l:"/power",a:"试试油电成本计算器 →"},{t:"买车到底要花多少钱？",l:"/price",a:"算一下落地价 →"},{t:"养车一年要花多少？",l:"/cost",a:"算一下养车成本 →"},{t:"买什么车？",l:"/used-10w",a:"看推荐榜单 →"},{t:"现在买车有多少优惠？",l:"/deals",a:"查看降价行情 →"}];var path=window.location.pathname;var pool=p.filter(function(x){return x.l!==path;});document.querySelectorAll(".self-ad").forEach(function(el){var ad=pool[Math.floor(Math.random()*pool.length)];el.innerHTML='<span class="ad-label">推荐</span><div>'+ad.t+' <a href="'+ad.l+'">'+ad.a+'</a></div>';});})();
 </script></body>
 </html>

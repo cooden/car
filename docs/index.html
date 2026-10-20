@@ -1,15 +1,18 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>买车指南 - 汽车品牌发展史 | 10万新车推荐 | 购车导购</title>
-    <meta name="description" content="买车指南网：汽车品牌发展史、10万元以内新车推荐（含纯电、插混）、落地价与养车成本计算、二手车对比选购，一站式解决选车难题。">
-    <meta name="keywords" content="汽车品牌发展史,10万新车推荐,纯电,插混,二手车对比,购车资讯,买车指南">
+    <title>买车指南 - 汽车品牌发展史 | 新车推荐 | 购车导购</title>
+    <meta name="description" content="买车指南网：汽车品牌发展史、元以内新车推荐（含纯电、插混）、落地价与养车成本计算、二手车对比选购，一站式解决选车难题。">
+    <meta name="keywords" content="汽车品牌发展史,新车推荐,纯电,插混,二手车对比,购车资讯,买车指南">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            font-family: 'Inter', 'Noto Sans SC', 'Noto Sans TC', 'Microsoft YaHei', sans-serif;
             background: #f0f2f5;
             color: #2c3e50;
             line-height: 1.6;
@@ -22,19 +25,47 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 0 12px;
         }
         .navbar a {
-            float: left;
             display: block;
             color: #e0e0e0;
             text-align: center;
-            padding: 15px 18px;
+            padding: 15px 14px;
             text-decoration: none;
-            font-size: 0.92rem;
+            font-size: 0.9rem;
             transition: all 0.25s;
+            white-space: nowrap;
         }
         .navbar a:hover { background: rgba(255,255,255,0.1); color: #fff; }
         .navbar a.active { background: #3498db; color: #fff; }
+
+        /* 语言切换 */
+        .lang-switch {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 10px 8px;
+            flex-shrink: 0;
+        }
+        .lang-btn {
+            padding: 5px 11px;
+            background: rgba(255,255,255,0.08);
+            color: #ccc;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 14px;
+            cursor: pointer;
+            font-size: 0.78rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        .lang-btn:hover { background: rgba(255,255,255,0.18); color: #fff; }
+        .lang-btn.active { background: #3498db; color: #fff; border-color: #3498db; }
 
         /* ===== Hero ===== */
         .hero {
@@ -59,7 +90,7 @@
             0%, 100% { transform: translate(0, 0); }
             50% { transform: translate(-3%, -3%); }
         }
-        .hero h1 { font-size: 2.4rem; margin-bottom: 14px; position: relative; }
+        .hero h1 { font-size: 2.4rem; margin-bottom: 14px; position: relative; font-weight: 800; letter-spacing: -0.5px; }
         .hero p { font-size: 1.05rem; opacity: 0.92; max-width: 720px; margin: 0 auto; position: relative; }
         .hero-tags { margin-top: 20px; position: relative; }
         .hero-tags span {
@@ -116,7 +147,7 @@
         }
         .self-ad a:hover { text-decoration: underline; }
 
-        /* ===== 10万推荐精选（挪到最前）===== */
+        /* ===== 推荐精选（挪到最前）===== */
         .featured-10w {
             background: linear-gradient(135deg, #fef9e7 0%, #fff 100%);
             border-radius: 16px;
@@ -155,7 +186,7 @@
             box-shadow: 0 8px 20px rgba(230,126,34,0.15);
             border-color: #e67e22;
         }
-        .feat-name { font-weight: 700; color: #2c3e50; margin-bottom: 4px; }
+        .feat-name { font-weight: 700; color: #2c3e50; margin-bottom: 4px; word-break: break-word; overflow-wrap: break-word; }
         .feat-type {
             display: inline-block;
             font-size: 0.72rem;
@@ -349,28 +380,30 @@
 </head>
 <body>
     <div class="navbar">
-        <a href="index.html" class="active">首页</a>
-        <a href="index.html#history">品牌发展史</a>
-        <a href="compare.html">新车对比</a>
-        <a href="price.html">落地价</a>
-        <a href="cost.html">养车成本</a>
-        <a href="used.html">二手车</a>
-        <a href="used-10w.html">推荐</a>
-        <a href="deals.html">降价行情</a>
-        <a href="library.html">车型库</a>
-        <a href="news.html">资讯</a>
-        <a href="model.html">展厅</a>
-<!-- <a href="power.html">油电成本</a> -->
+        <a href="index.html" class="active" data-i18n="nav_home">首页</a>
+        <a href="index.html#history" data-i18n="nav_history">品牌发展史</a>
+        <a href="used-10w.html" data-i18n="nav_rec">推荐</a>
+        <a href="price.html" data-i18n="nav_price">落地价</a>
+        <a href="cost.html" data-i18n="nav_cost">养车成本</a>
+        <a href="deals.html" data-i18n="nav_deals">降价行情</a>
+        <a href="library.html" data-i18n="nav_library">车型库</a>
+        <a href="news.html" data-i18n="nav_news">资讯</a>
+        <a href="model.html" data-i18n="nav_model">展厅</a>
+        <div class="lang-switch">
+            <button class="lang-btn active" data-lang="zh" onclick="setLang('zh')">简</button>
+            <button class="lang-btn" data-lang="zh_TW" onclick="setLang('zh_TW')">繁</button>
+            <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+        </div>
     </div>
 
     <div class="hero">
-        <h1>买车指南 · 帮您买对车，不踩坑</h1>
-        <p>聚合汽车品牌发展史、10 万元以内新车推荐（纯电 / 插混 / 燃油）、落地价与养车成本计算、二手车对比选购与购车资讯干货，一站式解决选车难题。</p>
+        <h1 data-i18n="hero_title">买车指南 · 帮您买对车，不踩坑</h1>
+        <p data-i18n="hero_sub">聚合汽车品牌发展史、10 万元以内新车推荐（纯电 / 插混 / 燃油）、落地价与养车成本计算、二手车对比选购与购车资讯干货，一站式解决选车难题。</p>
         <div class="hero-tags">
-            <span>🚗 10万新车推荐</span>
-            <span>⚡ 纯电 / 插混</span>
-            <span>📜 品牌发展史</span>
-            <span>💰 落地价计算</span>
+            <span data-i18n="hero_tag1">🚗 新车推荐</span>
+            <span data-i18n="hero_tag2">⚡ 纯电 / 插混</span>
+            <span data-i18n="hero_tag3">📜 品牌发展史</span>
+            <span data-i18n="hero_tag4">💰 落地价计算</span>
         </div>
     </div>
 
@@ -381,19 +414,19 @@
 
     <div class="content">
 
-        <!-- ===== 10万推荐精选（挪到最前）===== -->
+        <!-- ===== 推荐精选（挪到最前）===== -->
         <div class="featured-10w">
             <div class="sec-head">
-                <h2>🏆 10万以内新车推荐</h2>
-                <a href="used-10w.html" class="more">查看完整榜单 →</a>
+                <h2 data-i18n="feat_title">🏆 以内新车推荐</h2>
+                <a href="used-10w.html" class="more" data-i18n="feat_more">查看完整榜单 →</a>
             </div>
-            <p class="section-sub" style="margin-left:0;">精选 10 万元以内高性价比车型，含纯电、插混与燃油，覆盖代步、家用与通勤场景。</p>
+            <p class="section-sub" style="margin-left:0;" data-i18n="feat_sub">精选 10 万元以内高性价比车型，含纯电、插混与燃油，覆盖代步、家用与通勤场景。</p>
             <div class="featured-grid" id="featured-10w"></div>
         </div>
 
         <!-- ===== 汽车品牌发展史 ===== -->
-        <h2 class="section-title" id="history">📜 汽车品牌发展史</h2>
-        <p class="section-sub">从创立到崛起，快速了解主流汽车品牌的关键里程碑与技术路线。</p>
+        <h2 class="section-title" id="history" data-i18n="hist_title">📜 汽车品牌发展史</h2>
+        <p class="section-sub" data-i18n="hist_sub">从创立到崛起，快速了解主流汽车品牌的关键里程碑与技术路线。</p>
         <div class="brand-history">
             <div class="brand-tabs" id="brand-tabs"></div>
             <div class="brand-intro" id="brand-intro"></div>
@@ -408,7 +441,7 @@
         <div class="entry-grid">
             <a class="entry-card" href="used-10w.html">
                 <div class="entry-icon">🏆</div>
-                <h3>10万推荐</h3>
+                <h3>推荐</h3>
                 <p>10 万元以内高性价比新车榜单，含纯电、插混与燃油车型。</p>
             </a>
             <a class="entry-card" href="price.html">
@@ -456,126 +489,225 @@
     </footer>
 
     <script>
-        // ===== 10万推荐精选数据 =====
+        // ===== 多语言翻译字典 =====
+        const i18n = {
+            zh: {
+                nav_home: "首页", nav_history: "品牌发展史",
+                nav_price: "落地价", nav_cost: "养车成本",
+                nav_rec: "推荐", nav_deals: "降价行情",
+                nav_library: "车型库", nav_news: "资讯", nav_model: "展厅",
+                hero_title: "买车指南 · 帮您买对车，不踩坑",
+                hero_sub: "聚合汽车品牌发展史、10 万元以内新车推荐（纯电 / 插混 / 燃油）、落地价与养车成本计算、二手车对比选购与购车资讯干货，一站式解决选车难题。",
+                hero_tag1: "🚗 新车推荐", hero_tag2: "⚡ 纯电 / 插混",
+                hero_tag3: "📜 品牌发展史", hero_tag4: "💰 落地价计算",
+                feat_title: "🏆 以内新车推荐", feat_more: "查看完整榜单 →",
+                feat_sub: "精选 10 万元以内高性价比车型，含纯电、插混与燃油，覆盖代步、家用与通勤场景。",
+                hist_title: "📜 汽车品牌发展史",
+                hist_sub: "从创立到崛起，快速了解主流汽车品牌的关键里程碑与技术路线。",
+                footer_about: "关于我们", footer_contact: "联系我们",
+                footer_privacy: "隐私政策", footer_stats: "流量统计",
+                footer_copy: "买车指南 © 2026 | 数据仅供参考，实际价格以经销商报价为准",
+                type_phev: "插混", type_ev: "纯电", type_fuel: "燃油"
+            },
+            zh_TW: {
+                nav_home: "首頁", nav_history: "品牌發展史",
+                nav_price: "落地價", nav_cost: "養車成本",
+                nav_rec: "推薦", nav_deals: "降價行情",
+                nav_library: "車型庫", nav_news: "資訊", nav_model: "展廳",
+                hero_title: "買車指南 · 幫您買對車，不踩坑",
+                hero_sub: "聚合汽車品牌發展史、10 萬元以內新車推薦（純電 / 插混 / 燃油）、落地價與養車成本計算、二手車對比選購與購車資訊乾貨，一站式解決選車難題。",
+                hero_tag1: "🚗 新車推薦", hero_tag2: "⚡ 純電 / 插混",
+                hero_tag3: "📜 品牌發展史", hero_tag4: "💰 落地價計算",
+                feat_title: "🏆 以內新車推薦", feat_more: "查看完整榜單 →",
+                feat_sub: "精選 10 萬元以內高性價比車型，含純電、插混與燃油，覆蓋代步、家用與通勤場景。",
+                hist_title: "📜 汽車品牌發展史",
+                hist_sub: "從創立到崛起，快速了解主流汽車品牌的關鍵里程碑與技術路線。",
+                footer_about: "關於我們", footer_contact: "聯繫我們",
+                footer_privacy: "隱私政策", footer_stats: "流量統計",
+                footer_copy: "買車指南 © 2026 | 數據僅供參考，實際價格以經銷商報價為準",
+                type_phev: "插混", type_ev: "純電", type_fuel: "燃油"
+            },
+            en: {
+                nav_home: "Home", nav_history: "Brand History",
+                nav_price: "Price Calc", nav_cost: "Ownership Cost",
+                nav_rec: "Under 100k", nav_deals: "Deals",
+                nav_library: "Model Library", nav_news: "News", nav_model: "Showroom",
+                hero_title: "Car Buying Guide · Choose the Right Car",
+                hero_sub: "Brand development history, recommendations under 100k yuan (EV / PHEV / fuel), price & ownership calculators, used car comparison and buying guides — all in one place.",
+                hero_tag1: "🚗 Under 100k", hero_tag2: "⚡ EV / PHEV",
+                hero_tag3: "📜 Brand History", hero_tag4: "💰 Price Calculator",
+                feat_title: "🏆 Recommended Cars Under 100k", feat_more: "View Full List →",
+                feat_sub: "Hand-picked high-value models under 100,000 yuan, including EV, PHEV and fuel cars for commuting and family use.",
+                hist_title: "📜 Automotive Brand History",
+                hist_sub: "From founding to rise — key milestones and technology roadmaps of major car brands.",
+                footer_about: "About", footer_contact: "Contact",
+                footer_privacy: "Privacy", footer_stats: "Stats",
+                footer_copy: "Car Guide © 2026 | Data for reference only. Actual prices vary by dealer.",
+                type_phev: "PHEV", type_ev: "EV", type_fuel: "Fuel"
+            }
+        };
+
+        // ===== 推荐精选数据（多语言）=====
         const featuredCars = [
-            { name: "比亚迪秦PLUS DM-i", type: "phev", typeLabel: "插混", price: "9.98万起", tags: ["亏电4L", "绿牌", "热销"] },
-            { name: "比亚迪海豚", type: "ev", typeLabel: "纯电", price: "9.98万起", tags: ["刀片电池", "好开好停", "城市代步"] },
-            { name: "五菱缤果", type: "ev", typeLabel: "纯电", price: "5.98万起", tags: ["亲民", "颜值高", "通勤"] },
-            { name: "吉利银河L6", type: "phev", typeLabel: "插混", price: "10.58万起", tags: ["雷神混动", "长续航", "智能"] },
-            { name: "长安深蓝SL03", type: "ev", typeLabel: "纯电", price: "11.99万起", tags: ["后驱", "颜值", "性价比"] },
-            { name: "丰田卡罗拉", type: "fuel", typeLabel: "燃油", price: "10.86万起", tags: ["皮实耐用", "保值", "油耗低"] }
+            {
+                name: { zh: "比亚迪秦PLUS DM-i", zh_TW: "比亞迪秦PLUS DM-i", en: "BYD Qin PLUS DM-i" },
+                type: "phev", price: "9.98万起",
+                tags: { zh: ["亏电4L", "绿牌", "热销"], zh_TW: ["虧電4L", "綠牌", "熱銷"], en: ["4L depletion", "Green plate", "Best-seller"] }
+            },
+            {
+                name: { zh: "比亚迪海豚", zh_TW: "比亞迪海豚", en: "BYD Dolphin" },
+                type: "ev", price: "9.98万起",
+                tags: { zh: ["刀片电池", "好开好停", "城市代步"], zh_TW: ["刀片電池", "好开好停", "城市代步"], en: ["Blade battery", "Easy to park", "City commuter"] }
+            },
+            {
+                name: { zh: "五菱缤果", zh_TW: "五菱繽果", en: "Wuling Bingo" },
+                type: "ev", price: "5.98万起",
+                tags: { zh: ["亲民", "颜值高", "通勤"], zh_TW: ["親民", "顏值高", "通勤"], en: ["Affordable", "Stylish", "Commuter"] }
+            },
+            {
+                name: { zh: "吉利银河L6", zh_TW: "吉利銀河L6", en: "Geely Galaxy L6" },
+                type: "phev", price: "10.58万起",
+                tags: { zh: ["雷神混动", "长续航", "智能"], zh_TW: ["雷神混动", "長續航", "智慧"], en: ["Thor hybrid", "Long range", "Smart"] }
+            },
+            {
+                name: { zh: "长安深蓝SL03", zh_TW: "長安深藍SL03", en: "Changan Deepal SL03" },
+                type: "ev", price: "11.99万起",
+                tags: { zh: ["后驱", "颜值", "性价比"], zh_TW: ["後驅", "顏值", "性價比"], en: ["RWD", "Stylish", "Great value"] }
+            },
+            {
+                name: { zh: "丰田卡罗拉", zh_TW: "豐田卡羅拉", en: "Toyota Corolla" },
+                type: "fuel", price: "10.86万起",
+                tags: { zh: ["皮实耐用", "保值", "油耗低"], zh_TW: ["耐用", "保值", "油耗低"], en: ["Durable", "Resale value", "Low fuel"] }
+            }
         ];
 
-        // ===== 汽车品牌发展史数据 =====
+        // ===== 汽车品牌发展史数据（多语言）=====
         const brandHistory = {
             byd: {
-                name: "比亚迪",
-                intro: "1995 年从电池制造起家，2003 年跨界造车，2008 年推出全球首款量产插混 F3DM，2021 年 DM-i 超级混动爆发，2022 年登顶中国乘用车销量冠军，是全球新能源汽车的领跑者。",
+                name: { zh: "比亚迪", zh_TW: "比亞迪", en: "BYD" },
+                intro: {
+                    zh: "1995 年从电池制造起家，2003 年跨界造车，2008 年推出全球首款量产插混 F3DM，2021 年 DM-i 超级混动爆发，2022 年登顶中国乘用车销量冠军，是全球新能源汽车的领跑者。",
+                    zh_TW: "1995 年從電池製造起家，2003 年跨界造車，2008 年推出全球首款量產插混 F3DM，2021 年 DM-i 超級混動爆發，2022 年登頂中國乘用車銷量冠軍，是全球新能源汽車的領跑者。",
+                    en: "Founded in 1995 as a battery maker, BYD entered autos in 2003, launched the world's first mass-produced PHEV (F3DM) in 2008, and with its DM-i hybrid in 2021 became China's top-selling passenger car brand in 2022 — a global NEV leader."
+                },
                 timeline: [
-                    { year: "1995", text: "王传福创立比亚迪，专注二次充电电池制造" },
-                    { year: "2003", text: "收购西安秦川汽车，正式进入汽车行业" },
-                    { year: "2008", text: "推出全球首款量产插电混动车 F3DM" },
-                    { year: "2020", text: "发布刀片电池，针刺试验引领安全新标准" },
-                    { year: "2021", text: "DM-i 超级混动发布，亏电油耗低至 3.8L" },
-                    { year: "2022", text: "停产纯燃油车，全面转型新能源，年销量 186 万辆" },
-                    { year: "2024", text: "年销量突破 427 万辆，蝉联全球新能源销冠" }
+                    { year: "1995", text: { zh: "王传福创立比亚迪，专注二次充电电池", zh_TW: "王傳福創立比亞迪，專注二次充電電池", en: "Wang Chuanfu founds BYD, focused on rechargeable batteries" } },
+                    { year: "2003", text: { zh: "收购秦川汽车，正式进入汽车行业", zh_TW: "收購秦川汽車，正式進入汽車行業", en: "Acquires Qinchuan Auto, officially enters the auto industry" } },
+                    { year: "2008", text: { zh: "推出全球首款量产插混 F3DM", zh_TW: "推出全球首款量產插混 F3DM", en: "Launches F3DM, world's first mass-produced PHEV" } },
+                    { year: "2021", text: { zh: "DM-i 超级混动发布，亏电油耗低至 3.8L", zh_TW: "DM-i 超級混動發布，虧電油耗低至 3.8L", en: "DM-i super hybrid debuts, depletion fuel as low as 3.8L/100km" } },
+                    { year: "2022", text: { zh: "停产纯燃油车，年销量 186 万辆", zh_TW: "停產純燃油車，年銷量 186 萬輛", en: "Stops pure ICE production; sells 1.86M units" } }
                 ]
             },
             tesla: {
-                name: "特斯拉",
-                intro: "2003 年创立于美国硅谷，以纯电动+智能化颠覆汽车行业。Roadster 证明电车也能快，Model 3/Y 走向大众，FSD 与超充网络构建护城河，是全球市值最高的车企。",
+                name: { zh: "特斯拉", zh_TW: "特斯拉", en: "Tesla" },
+                intro: {
+                    zh: "2003 年创立于美国硅谷，以纯电动+智能化颠覆汽车行业。Roadster 证明电车也能快，Model 3/Y 走向大众，FSD 与超充网络构建护城河，是全球市值最高的车企。",
+                    zh_TW: "2003 年創立於美國矽谷，以純電動+智慧化顛覆汽車行業。Roadster 證明電車也能快，Model 3/Y 走向大眾，FSD 與超充網絡構建護城河，是全球市值最高的車企。",
+                    en: "Founded in Silicon Valley in 2003, Tesla disrupted the industry with EVs and software. Roadster proved EVs can be fast, Model 3/Y went mass-market, and FSD + Supercharger build a moat — the world's most valuable carmaker."
+                },
                 timeline: [
-                    { year: "2003", text: "马丁·艾伯哈德与马克·塔彭宁创立特斯拉" },
-                    { year: "2008", text: "交付 Roadster，首款量产纯电跑车" },
-                    { year: "2012", text: "Model S 上市，开启高端纯电轿车时代" },
-                    { year: "2017", text: "Model 3 量产，开启电动化普及浪潮" },
-                    { year: "2020", text: "Model Y 上市，迅速成为全球最畅销电动车" },
-                    { year: "2023", text: "全球交付 181 万辆，Cybertruck 开始交付" }
+                    { year: "2003", text: { zh: "马丁·艾伯哈德与马克·塔彭宁创立特斯拉", zh_TW: "創立特斯拉", en: "Eberhard & Tarpenning found Tesla" } },
+                    { year: "2008", text: { zh: "交付 Roadster，首款量产纯电跑车", zh_TW: "交付 Roadster，首款量產純電跑車", en: "Delivers Roadster, first production EV sports car" } },
+                    { year: "2012", text: { zh: "Model S 上市，开启高端纯电轿车时代", zh_TW: "Model S 上市", en: "Model S launches, defining premium EV sedans" } },
+                    { year: "2017", text: { zh: "Model 3 量产，开启电动化普及浪潮", zh_TW: "Model 3 量產", en: "Model 3 enters mass production" } },
+                    { year: "2020", text: { zh: "Model Y 上市，成为全球最畅销电动车", zh_TW: "Model Y 上市", en: "Model Y launches, becomes best-selling EV globally" } }
                 ]
             },
             geely: {
-                name: "吉利",
-                intro: "1986 年从冰箱配件起步，1997 年进军汽车，2010 年收购沃尔沃成为中国车企国际化标杆。如今旗下拥有吉利、领克、极氪、几何等品牌，覆盖燃油、混动、纯电全谱系。",
+                name: { zh: "吉利", zh_TW: "吉利", en: "Geely" },
+                intro: {
+                    zh: "1986 年从冰箱配件起步，1997 年进军汽车，2010 年收购沃尔沃成为中国车企国际化标杆。旗下拥有吉利、领克、极氪等品牌，覆盖燃油、混动、纯电全谱系。",
+                    zh_TW: "1986 年從冰箱配件起步，1997 年進軍汽車，2010 年收購沃爾沃成為中國車企國際化標杆。旗下擁有吉利、領克、極氪等品牌，覆蓋燃油、混動、純電全譜系。",
+                    en: "Started in 1986 making fridge parts, entered autos in 1997, and acquired Volvo in 2010 — a benchmark for Chinese automakers going global. Its brands include Geely, Lynk & Co, Zeekr, covering ICE, hybrid and EV."
+                },
                 timeline: [
-                    { year: "1986", text: "李书福创立吉利，生产冰箱配件" },
-                    { year: "1997", text: "进入汽车行业，造老百姓买得起的好车" },
-                    { year: "2010", text: "18 亿美元收购沃尔沃轿车 100% 股权" },
-                    { year: "2017", text: "领克品牌发布，冲击高端市场" },
-                    { year: "2021", text: "极氪品牌成立，专注高端纯电" },
-                    { year: "2024", text: "极氪 001 FR 交付，吉利新能源转型加速" }
+                    { year: "1986", text: { zh: "李书福创立吉利，生产冰箱配件", zh_TW: "李書福創立吉利", en: "Li Shufu founds Geely, making fridge parts" } },
+                    { year: "1997", text: { zh: "进入汽车行业，造老百姓买得起的好车", zh_TW: "進入汽車行業", en: "Enters auto industry: 'good cars ordinary people can afford'" } },
+                    { year: "2010", text: { zh: "18 亿美元收购沃尔沃轿车 100% 股权", zh_TW: "收購沃爾沃", en: "Acquires 100% of Volvo Cars for $1.8B" } },
+                    { year: "2017", text: { zh: "领克品牌发布，冲击高端市场", zh_TW: "領克品牌發布", en: "Lynk & Co brand launches, targeting premium market" } },
+                    { year: "2021", text: { zh: "极氪品牌成立，专注高端纯电", zh_TW: "極氪品牌成立", en: "Zeekr founded, focused on premium EVs" } }
                 ]
             },
             toyota: {
-                name: "丰田",
-                intro: "1937 年从织布机业务延伸到汽车，以精益生产方式（TPS）闻名全球。1997 年普锐斯开创混动时代，卡罗拉成为全球销量冠军，是全球最大的汽车制造商之一。",
+                name: { zh: "丰田", zh_TW: "豐田", en: "Toyota" },
+                intro: {
+                    zh: "1937 年从织布机业务延伸到汽车，以精益生产方式（TPS）闻名全球。1997 年普锐斯开创混动时代，卡罗拉成为全球销量冠军，是全球最大的汽车制造商之一。",
+                    zh_TW: "1937 年從織布機業務延伸到汽車，以精益生產方式（TPS）聞名全球。1997 年普銳斯開創混動時代，卡羅拉成為全球銷量冠軍，是全球最大的汽車製造商之一。",
+                    en: "Spun off from a loom business in 1937, Toyota is famed for the Toyota Production System. The 1997 Prius pioneered hybrids, Corolla became the world's best-selling car, and Toyota is one of the largest automakers on earth."
+                },
                 timeline: [
-                    { year: "1937", text: "丰田汽车工业株式会社正式成立" },
-                    { year: "1966", text: "卡罗拉上市，累计销量突破 5000 万辆" },
-                    { year: "1989", text: "雷克萨斯品牌发布，进军豪华车市场" },
-                    { year: "1997", text: "普锐斯上市，全球首款量产混合动力车" },
-                    { year: "2008", text: "超越通用，成为全球销量第一车企" },
-                    { year: "2022", text: "bZ4X 上市，加速纯电转型" }
+                    { year: "1937", text: { zh: "丰田汽车工业株式会社正式成立", zh_TW: "豐田汽車成立", en: "Toyota Motor Corporation is founded" } },
+                    { year: "1966", text: { zh: "卡罗拉上市，累计销量超 5000 万辆", zh_TW: "卡羅拉上市", en: "Corolla launches; lifetime sales exceed 50M" } },
+                    { year: "1997", text: { zh: "普锐斯上市，全球首款量产混动车", zh_TW: "普銳斯上市", en: "Prius launches, world's first mass-produced hybrid" } },
+                    { year: "2008", text: { zh: "超越通用，成为全球销量第一车企", zh_TW: "超越通用", en: "Surpasses GM as world's top-selling automaker" } },
+                    { year: "2022", text: { zh: "bZ4X 上市，加速纯电转型", zh_TW: "bZ4X 上市", en: "bZ4X launches, accelerating EV push" } }
                 ]
             },
             volkswagen: {
-                name: "大众",
-                intro: "1937 年由德国政府主导创立，甲壳虫成为国民车象征。高尔夫开创紧凑级两厢车时代，在中国市场深耕多年，是燃油车时代的霸主，目前正向电动化（MEB 平台）转型。",
+                name: { zh: "大众", zh_TW: "福斯", en: "Volkswagen" },
+                intro: {
+                    zh: "1937 年由德国政府主导创立，甲壳虫成为国民车象征。高尔夫开创紧凑级两厢车时代，在中国市场深耕多年，是燃油车时代的霸主，目前正向电动化（MEB 平台）转型。",
+                    zh_TW: "1937 年由德國政府主導創立，甲蟲車成為國民車象徵。高爾夫開創緊湊級兩廂車時代，在中國市場深耕多年，是燃油車時代的霸主，目前正向電動化（MEB 平台）轉型。",
+                    en: "Founded in 1937 under German government backing, the Beetle became a people's car icon. The Golf defined the compact hatchback era. Long dominant in China and the ICE age, VW is now pivoting to EVs on its MEB platform."
+                },
                 timeline: [
-                    { year: "1937", text: "大众汽车公司成立，推出甲壳虫" },
-                    { year: "1974", text: "高尔夫上市，成为两厢车标杆" },
-                    { year: "1985", text: "与上汽合资，桑塔纳进入中国" },
-                    { year: "1991", text: "一汽大众成立，捷达成为国民家轿" },
-                    { year: "2015", text: "排放门事件爆发，加速电动化转型" },
-                    { year: "2020", text: "ID.3 上市，MEB 纯电平台落地" }
+                    { year: "1937", text: { zh: "大众汽车成立，推出甲壳虫", zh_TW: "福斯汽車成立", en: "Volkswagen founded; Beetle introduced" } },
+                    { year: "1974", text: { zh: "高尔夫上市，成为两厢车标杆", zh_TW: "高爾夫上市", en: "Golf launches, becomes the hatchback benchmark" } },
+                    { year: "1985", text: { zh: "与上汽合资，桑塔纳进入中国", zh_TW: "與上汽合資", en: "JV with SAIC; Santana enters China" } },
+                    { year: "2015", text: { zh: "排放门事件爆发，加速电动化转型", zh_TW: "排放門事件", en: "Dieselgate erupts; accelerates EV transition" } },
+                    { year: "2020", text: { zh: "ID.3 上市，MEB 纯电平台落地", zh_TW: "ID.3 上市", en: "ID.3 launches; MEB EV platform goes live" } }
                 ]
             },
             nio: {
-                name: "蔚来",
-                intro: "2014 年创立，以换电模式与高端服务切入新能源市场。ES8 打响品牌，ET5 走量，NIO Power 补能网络与 NIO House 用户社区构建差异化优势，是中国高端纯电代表。",
+                name: { zh: "蔚来", zh_TW: "蔚來", en: "NIO" },
+                intro: {
+                    zh: "2014 年创立，以换电模式与高端服务切入新能源市场。ES8 打响品牌，ET5 走量，NIO Power 补能网络与 NIO House 用户社区构建差异化优势，是中国高端纯电代表。",
+                    zh_TW: "2014 年創立，以換電模式與高端服務切入新能源市場。ES8 打響品牌，ET5 走量，NIO Power 補能網絡與 NIO House 用戶社區構建差異化優勢，是中國高端純電代表。",
+                    en: "Founded in 2014, NIO entered the NEV market with battery swap and premium service. ES8 built the brand, ET5 drives volume, and NIO Power + NIO House create a differentiated edge — China's premium EV flagbearer."
+                },
                 timeline: [
-                    { year: "2014", text: "李斌创立蔚来，定位高端智能电动车" },
-                    { year: "2018", text: "纽交所上市，ES8 正式交付" },
-                    { year: "2019", text: "推出换电体系，NIO Power 上线" },
-                    { year: "2022", text: "ET5/ET7 交付，补齐轿车产品线" },
-                    { year: "2024", text: "换电站突破 2500 座，乐道品牌发布" }
+                    { year: "2014", text: { zh: "李斌创立蔚来，定位高端智能电动车", zh_TW: "李斌創立蔚來", en: "Li Bin founds NIO, targeting premium smart EVs" } },
+                    { year: "2018", text: { zh: "纽交所上市，ES8 正式交付", zh_TW: "紐交所上市", en: "Lists on NYSE; ES8 deliveries begin" } },
+                    { year: "2019", text: { zh: "推出换电体系，NIO Power 上线", zh_TW: "推出換電體系", en: "Launches battery swap system; NIO Power goes live" } },
+                    { year: "2022", text: { zh: "ET5/ET7 交付，补齐轿车产品线", zh_TW: "ET5/ET7 交付", en: "ET5/ET7 delivered, completing sedan line-up" } },
+                    { year: "2024", text: { zh: "换电站突破 2500 座，乐道品牌发布", zh_TW: "換電站突破 2500 座", en: "Swap stations exceed 2,500; Onvo brand launches" } }
                 ]
             }
         };
 
-        const newsData = [
-            { cat: "导购", title: "10万预算买纯电还是插混？一篇讲透优缺点", summary: "从补能条件、用车成本、保值率三个维度，帮你确定最适合的动力类型。", date: "2026-10-01" },
-            { cat: "品牌", title: "比亚迪 30 年：从电池厂到全球新能源销冠", summary: "复盘比亚迪关键技术节点，看中国车企如何实现弯道超车。", date: "2026-09-25" },
-            { cat: "行情", title: "金九银十购车优惠季，终端行情汇总", summary: "主流品牌终端优惠幅度盘点，什么时候出手最划算？", date: "2026-09-20" },
-            { cat: "二手车", title: "二手新能源车能买吗？电池衰减如何评估", summary: "查验电池健康度、查维保记录，几个技巧降低踩坑概率。", date: "2026-09-12" }
-        ];
-
-        // ===== 自推广广告 =====
-        const adPool = [
-            { text: "📊 想知道油车电车哪个更省？", link: "power.html", linkText: "试试油电成本计算器 →" },
-            { text: "💰 买车到底要花多少钱？", link: "price.html", linkText: "算一下落地价 →" },
-            { text: "⚡ 养车一年要花多少？", link: "cost.html", linkText: "算一下养车成本 →" },
-            { text: "🏆 10万买什么车？", link: "used-10w.html", linkText: "看10万推荐榜单 →" },
-            { text: "📉 现在买车有多少优惠？", link: "deals.html", linkText: "查看降价行情 →" }
-        ];
-        function renderAd(id) {
-            const el = document.getElementById(id);
-            if (!el) return;
-            const path = window.location.pathname.split("/").pop() || "index.html";
-            const pool = adPool.filter(a => a.link !== path);
-            const ad = pool[Math.floor(Math.random() * pool.length)];
-            el.innerHTML = `<span class="ad-label">推荐</span><div>${ad.text} <a href="${ad.link}">${ad.linkText}</a></div>`;
+        // ===== 语言切换 =====
+        let currentLang = localStorage.getItem('lang') || 'zh';
+        function setLang(lang) {
+            currentLang = lang;
+            localStorage.setItem('lang', lang);
+            applyLang();
+            renderFeatured();
+            renderBrandTabs();
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+        }
+        function t(key) { return (i18n[currentLang] && i18n[currentLang][key]) || key; }
+        function applyLang() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                el.textContent = t(el.dataset.i18n);
+            });
+            // footer
+            const f = document.querySelector('footer p');
+            if (f) f.innerHTML = `<a href="about.html">${t('footer_about')}</a> | <a href="contact.html">${t('footer_contact')}</a> | <a href="privacy.html">${t('footer_privacy')}</a> | <a href="stats.html">${t('footer_stats')}</a>`;
+            const f2 = document.querySelectorAll('footer p')[1];
+            if (f2) f2.textContent = t('footer_copy');
         }
 
-        // ===== 渲染 10万精选 =====
+        // ===== 渲染 精选 =====
         function renderFeatured() {
             const grid = document.getElementById('featured-10w');
+            grid.innerHTML = '';
             featuredCars.forEach(car => {
-                const tags = car.tags.map(t => `<span>${t}</span>`).join('');
+                const tags = car.tags[currentLang].map(tag => `<span>${tag}</span>`).join('');
                 const card = document.createElement('div');
                 card.className = 'feat-card';
                 card.innerHTML = `
-                    <div class="feat-name">${car.name}</div>
-                    <span class="feat-type ${car.type}">${car.typeLabel}</span>
+                    <div class="feat-name">${car.name[currentLang]}</div>
+                    <span class="feat-type ${car.type}">${t('type_' + car.type)}</span>
                     <div class="feat-price">${car.price}</div>
                     <div class="feat-tags">${tags}</div>
                 `;
@@ -586,11 +718,12 @@
         // ===== 渲染品牌发展史 =====
         function renderBrandTabs() {
             const tabs = document.getElementById('brand-tabs');
+            tabs.innerHTML = '';
             const keys = Object.keys(brandHistory);
             keys.forEach((key, i) => {
                 const btn = document.createElement('button');
                 btn.className = 'brand-tab' + (i === 0 ? ' active' : '');
-                btn.textContent = brandHistory[key].name;
+                btn.textContent = brandHistory[key].name[currentLang];
                 btn.onclick = () => selectBrand(key, btn);
                 tabs.appendChild(btn);
             });
@@ -603,25 +736,22 @@
         }
         function renderBrand(key) {
             const b = brandHistory[key];
-            document.getElementById('brand-intro').textContent = b.intro;
+            document.getElementById('brand-intro').textContent = b.intro[currentLang];
             const tl = document.getElementById('brand-timeline');
             tl.innerHTML = '';
             b.timeline.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'tl-item';
-                div.innerHTML = `<div class="tl-year">${item.year}</div><div class="tl-text">${item.text}</div>`;
+                div.innerHTML = `<div class="tl-year">${item.year}</div><div class="tl-text">${item.text[currentLang]}</div>`;
                 tl.appendChild(div);
             });
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            // renderAd('self-ad-1');
-            // renderAd('self-ad-2');
+            applyLang();
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === currentLang));
             renderFeatured();
             renderBrandTabs();
-            // 资讯渲染已随资讯区块注释
-            // const newsList = document.getElementById('news-list');
-            // newsData.forEach((news, index) => { ... });
         });
     </script>
 

@@ -1,38 +1,69 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>10万以内新车推荐榜单 - 纯电/插混/燃油高性价比车型 - 买车指南</title>
-    <meta name="description" content="10万元以内买什么车？精选纯电、插混与燃油高性价比新车推荐榜单，覆盖代步、家用与通勤，附参考价与亮点标签。">
-    <meta name="keywords" content="10万新车推荐,纯电,插混,10万以内,高性价比,比亚迪,五菱">
+    <title>以内新车推荐榜单 - 纯电/插混/燃油高性价比车型 - 买车指南</title>
+    <meta name="description" content="元以内买什么车？精选纯电、插混与燃油高性价比新车推荐榜单，覆盖代步、家用与通勤，附参考价与亮点标签。">
+    <meta name="keywords" content="新车推荐,纯电,插混,以内,高性价比,比亚迪,五菱">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            font-family: 'Inter', 'Noto Sans SC', 'Noto Sans TC', 'Microsoft YaHei', sans-serif;
             background: #f0f2f5;
             color: #2c3e50;
             line-height: 1.6;
         }
+        .lang-btn {
+            padding: 5px 11px;
+            background: rgba(255,255,255,0.08);
+            color: #ccc;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 14px;
+            cursor: pointer;
+            font-size: 0.78rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        .lang-btn:hover { background: rgba(255,255,255,0.18); color: #fff; }
+        .lang-btn.active { background: #3498db; color: #fff; border-color: #3498db; }
         .navbar {
             background: linear-gradient(90deg, #1a1a2e 0%, #16213e 100%);
             box-shadow: 0 2px 12px rgba(0,0,0,0.15);
             position: sticky;
             top: 0;
             z-index: 100;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 0 12px;
         }
         .navbar a {
-            float: left;
             display: block;
             color: #e0e0e0;
             text-align: center;
-            padding: 15px 18px;
+            padding: 15px 14px;
             text-decoration: none;
-            font-size: 0.92rem;
+            font-size: 0.9rem;
             transition: all 0.25s;
+            white-space: nowrap;
         }
         .navbar a:hover { background: rgba(255,255,255,0.1); color: #fff; }
         .navbar a.active { background: #3498db; color: #fff; }
+
+        /* 语言切换 */
+        .lang-switch {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 10px 8px;
+            flex-shrink: 0;
+        }
 
         .content { padding: 30px 20px; max-width: 1000px; margin: 0 auto; }
 
@@ -94,8 +125,8 @@
         }
         .rank-card.ev .rank-no { background: linear-gradient(135deg, #27ae60, #16a085); }
         .rank-card.phev .rank-no { background: linear-gradient(135deg, #e67e22, #f39c12); }
-        .rank-body { padding: 18px 22px; flex: 1; }
-        .rank-body h3 { color: #1a1a2e; margin-bottom: 6px; font-size: 1.1rem; }
+        .rank-body { padding: 18px 22px; flex: 1; min-width: 0; }
+        .rank-body h3 { color: #1a1a2e; margin-bottom: 6px; font-size: 1.1rem; word-break: break-word; overflow-wrap: break-word; }
         .rank-tags { margin: 8px 0; }
         .rank-tags span {
             display: inline-block;
@@ -103,6 +134,7 @@
             padding: 3px 9px;
             font-size: 0.75rem;
             margin-right: 6px;
+            margin-bottom: 4px;
             font-weight: 600;
         }
         .tag-ev { background: #e8f8f1; color: #27ae60; }
@@ -161,31 +193,33 @@
 </head>
 <body>
     <div class="navbar">
-        <a href="index.html">首页</a>
-        <a href="index.html#history">品牌发展史</a>
-        <a href="compare.html">新车对比</a>
-        <a href="price.html">落地价</a>
-        <a href="cost.html">养车成本</a>
-        <a href="used.html">二手车</a>
-        <a href="used-10w.html" class="active">10万推荐</a>
-        <a href="deals.html">降价行情</a>
-        <a href="library.html">车型库</a>
-        <a href="news.html">资讯</a>
-        <a href="model.html">展厅</a>
-<!-- <a href="power.html">油电成本</a> -->
+        <a href="index.html" data-i18n="nav_home">首页</a>
+        <a href="index.html#history" data-i18n="nav_history">品牌发展史</a>
+        <a href="used-10w.html" class="active" data-i18n="nav_rec">推荐</a>
+        <a href="price.html" data-i18n="nav_price">落地价</a>
+        <a href="cost.html" data-i18n="nav_cost">养车成本</a>
+        <a href="deals.html" data-i18n="nav_deals">降价行情</a>
+        <a href="library.html" data-i18n="nav_library">车型库</a>
+        <a href="news.html" data-i18n="nav_news">资讯</a>
+        <a href="model.html" data-i18n="nav_model">展厅</a>
+        <div class="lang-switch">
+            <button class="lang-btn active" data-lang="zh" onclick="setLang('zh')">简</button>
+            <button class="lang-btn" data-lang="zh_TW" onclick="setLang('zh_TW')">繁</button>
+            <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+        </div>
     </div>
 
     <div class="content">
         <div class="page-head">
-            <h1>🏆 10万以内新车推荐榜单</h1>
-            <p>预算 10 万元左右，是国内家用代步车最主流的价格带。以下榜单优先推荐纯电与插混车型，兼顾燃油代步，综合性价比、可靠性与养护成本整理，价格仅供参考。</p>
+            <h1 data-i18n="page_title">🏆 以内新车推荐榜单</h1>
+            <p data-i18n="page_sub">预算 10 万元左右，是国内家用代步车最主流的价格带。以下榜单优先推荐纯电与插混车型，兼顾燃油代步，综合性价比、可靠性与养护成本整理，价格仅供参考。</p>
         </div>
 
         <div class="filter-bar" id="filter-bar">
-            <button class="filter-btn active" onclick="filterList('all', this)">全部</button>
-            <button class="filter-btn" onclick="filterList('ev', this)">纯电</button>
-            <button class="filter-btn" onclick="filterList('phev', this)">插混</button>
-            <button class="filter-btn" onclick="filterList('fuel', this)">燃油</button>
+            <button class="filter-btn active" onclick="filterList('all', this)" data-i18n="f_all">全部</button>
+            <button class="filter-btn" onclick="filterList('ev', this)" data-i18n="f_ev">纯电</button>
+            <button class="filter-btn" onclick="filterList('phev', this)" data-i18n="f_phev">插混</button>
+            <button class="filter-btn" onclick="filterList('fuel', this)" data-i18n="f_fuel">燃油</button>
         </div>
 
         <div class="rank-list" id="rank-list"></div>
@@ -208,36 +242,121 @@
     </footer>
 
     <script>
-        // 10万以内推荐车型（电车插混优先，无本田）
+        // ===== 多语言翻译字典 =====
+        const i18n = {
+            zh: {
+                nav_home: "首页", nav_history: "品牌发展史",
+                nav_price: "落地价", nav_cost: "养车成本",
+                nav_rec: "推荐", nav_deals: "降价行情",
+                nav_library: "车型库", nav_news: "资讯", nav_model: "展厅",
+                page_title: "🏆 以内新车推荐榜单",
+                page_sub: "预算 10 万元左右，是国内家用代步车最主流的价格带。以下榜单优先推荐纯电与插混车型，兼顾燃油代步，综合性价比、可靠性与养护成本整理，价格仅供参考。",
+                f_all: "全部", f_ev: "纯电", f_phev: "插混", f_fuel: "燃油",
+                type_ev: "纯电", type_phev: "插混", type_fuel: "燃油",
+                price_from: "参考价 ",
+                footer_about: "关于我们", footer_contact: "联系我们",
+                footer_privacy: "隐私政策", footer_stats: "流量统计",
+                footer_copy: "买车指南 © 2026 | 数据仅供参考，实际价格以经销商报价为准"
+            },
+            zh_TW: {
+                nav_home: "首頁", nav_history: "品牌發展史",
+                nav_price: "落地價", nav_cost: "養車成本",
+                nav_rec: "推薦", nav_deals: "降價行情",
+                nav_library: "車型庫", nav_news: "資訊", nav_model: "展廳",
+                page_title: "🏆 以內新車推薦榜單",
+                page_sub: "預算 10 萬元左右，是國內家用代步車最主流的價格帶。以下榜單優先推薦純電與插混車型，兼顧燃油代步，綜合性價比、可靠性與養護成本整理，價格僅供參考。",
+                f_all: "全部", f_ev: "純電", f_phev: "插混", f_fuel: "燃油",
+                type_ev: "純電", type_phev: "插混", type_fuel: "燃油",
+                price_from: "參考價 ",
+                footer_about: "關於我們", footer_contact: "聯繫我們",
+                footer_privacy: "隱私政策", footer_stats: "流量統計",
+                footer_copy: "買車指南 © 2026 | 數據僅供參考，實際價格以經銷商報價為準"
+            },
+            en: {
+                nav_home: "Home", nav_history: "Brand History",
+                nav_price: "Price Calc", nav_cost: "Ownership Cost",
+                nav_rec: "Under 100k", nav_deals: "Deals",
+                nav_library: "Model Library", nav_news: "News", nav_model: "Showroom",
+                page_title: "🏆 Recommended Cars Under 100k Yuan",
+                page_sub: "Around 100,000 yuan is the most popular budget for family commuter cars in China. This list prioritizes EV and PHEV models, with fuel options, ranked by value, reliability and ownership cost. Prices are for reference only.",
+                f_all: "All", f_ev: "EV", f_phev: "PHEV", f_fuel: "Fuel",
+                type_ev: "EV", type_phev: "PHEV", type_fuel: "Fuel",
+                price_from: "From ",
+                footer_about: "About", footer_contact: "Contact",
+                footer_privacy: "Privacy", footer_stats: "Stats",
+                footer_copy: "Car Guide © 2026 | Data for reference only. Actual prices vary by dealer."
+            }
+        };
+
+        // 以内推荐车型（多语言）
         const carList = [
-            { name: "比亚迪秦PLUS DM-i", type: "phev", year: "2025款", price: "9.98万起", tags: ["亏电4L", "绿牌", "热销", "空间大"], desc: "插混家轿销量王，亏电油耗低至 4L，可油可电无续航焦虑，家用首选。" },
-            { name: "比亚迪海豚", type: "ev", year: "2025款", price: "9.98万起", tags: ["刀片电池", "好开好停", "城市代步"], desc: "e平台3.0小型纯电，刀片电池安全，车身灵活好停，城市通勤神器。" },
-            { name: "五菱缤果", type: "ev", year: "2025款", price: "5.98万起", tags: ["亲民", "颜值高", "通勤"], desc: "5万级纯电小车，颜值在线、上手简单，短途代步性价比极高。" },
-            { name: "吉利银河L6", type: "phev", year: "2025款", price: "10.58万起", tags: ["雷神混动", "长续航", "智能"], desc: "雷神混动技术，纯电续航 60-125km，智能座舱体验出色。" },
-            { name: "比亚迪元PLUS", type: "ev", year: "2025款", price: "11.98万起", tags: ["刀片电池", "SUV", "海外热销"], desc: "紧凑型纯电 SUV，e平台3.0，已出口多国，空间与续航均衡。" },
-            { name: "长安深蓝SL03", type: "ev", year: "2025款", price: "11.99万起", tags: ["后驱", "颜值", "性价比"], desc: "后驱纯电轿跑，无框车门+掀背尾门，颜值与操控兼具。" },
-            { name: "丰田卡罗拉", type: "fuel", year: "2024款", price: "10.86万起", tags: ["皮实耐用", "保值", "油耗低"], desc: "全球销量王，1.2T 动力平顺，可靠性口碑极佳，保值率稳定。" },
-            { name: "日产轩逸", type: "fuel", year: "2024款", price: "10.86万起", tags: ["大沙发", "空间大", "省油"], desc: "座椅舒适度同价位无对手，后排空间宽裕，适合家庭出行。" },
-            { name: "大众朗逸", type: "fuel", year: "2025款", price: "12.09万起", tags: ["德系质感", "保有量大", "维修方便"], desc: "国民家轿，底盘扎实，配件到处能修，保值率稳定。" },
-            { name: "哈弗H6", type: "fuel", year: "2024款", price: "9.59万起", tags: ["SUV销冠", "空间大", "配置高"], desc: "想花小钱买大空间 SUV，H6 是绕不开的选择，保有量大维修方便。" }
+            { name: { zh: "比亚迪秦PLUS DM-i", zh_TW: "比亞迪秦PLUS DM-i", en: "BYD Qin PLUS DM-i" }, type: "phev", year: "2025", price: "9.98万起",
+              tags: { zh: ["亏电4L","绿牌","热销","空间大"], zh_TW: ["虧電4L","綠牌","熱銷","空間大"], en: ["4L depletion","Green plate","Best-seller","Spacious"] },
+              desc: { zh: "插混家轿销量王，亏电油耗低至 4L，可油可电无续航焦虑，家用首选。", zh_TW: "插混家轎銷量王，虧電油耗低至 4L，可油可電無續航焦慮，家用首選。", en: "Best-selling PHEV sedan, 4L/100km depletion, runs on fuel or electricity — top family pick." } },
+            { name: { zh: "比亚迪海豚", zh_TW: "比亞迪海豚", en: "BYD Dolphin" }, type: "ev", year: "2025", price: "9.98万起",
+              tags: { zh: ["刀片电池","好开好停","城市代步"], zh_TW: ["刀片電池","好开好停","城市代步"], en: ["Blade battery","Easy to park","City commuter"] },
+              desc: { zh: "e平台3.0小型纯电，刀片电池安全，车身灵活好停，城市通勤神器。", zh_TW: "e平台3.0小型純電，刀片電池安全，車身靈活好停，城市通勤神器。", en: "Compact EV on e-Platform 3.0, safe Blade battery, nimble and easy to park — perfect for the city." } },
+            { name: { zh: "五菱缤果", zh_TW: "五菱繽果", en: "Wuling Bingo" }, type: "ev", year: "2025", price: "5.98万起",
+              tags: { zh: ["亲民","颜值高","通勤"], zh_TW: ["親民","顏值高","通勤"], en: ["Affordable","Stylish","Commuter"] },
+              desc: { zh: "5万级纯电小车，颜值在线、上手简单，短途代步性价比极高。", zh_TW: "5萬級純電小車，顏值在線、上手簡單，短途代步性價比極高。", en: "Sub-60k EV runabout, stylish and easy to drive — unbeatable value for short trips." } },
+            { name: { zh: "吉利银河L6", zh_TW: "吉利銀河L6", en: "Geely Galaxy L6" }, type: "phev", year: "2025", price: "10.58万起",
+              tags: { zh: ["雷神混动","长续航","智能"], zh_TW: ["雷神混动","長續航","智慧"], en: ["Thor hybrid","Long range","Smart"] },
+              desc: { zh: "雷神混动技术，纯电续航 60-125km，智能座舱体验出色。", zh_TW: "雷神混動技術，純電續航 60-125km，智慧座艙體驗出色。", en: "Thor hybrid tech, 60-125km EV range, excellent smart cockpit experience." } },
+            { name: { zh: "比亚迪元PLUS", zh_TW: "比亞迪元PLUS", en: "BYD Yuan PLUS" }, type: "ev", year: "2025", price: "11.98万起",
+              tags: { zh: ["刀片电池","SUV","海外热销"], zh_TW: ["刀片電池","SUV","海外熱銷"], en: ["Blade battery","SUV","Global hit"] },
+              desc: { zh: "紧凑型纯电 SUV，e平台3.0，已出口多国，空间与续航均衡。", zh_TW: "緊湊型純電 SUV，e平台3.0，已出口多國，空間與續航均衡。", en: "Compact EV SUV on e-Platform 3.0, exported worldwide — balanced space and range." } },
+            { name: { zh: "长安深蓝SL03", zh_TW: "長安深藍SL03", en: "Changan Deepal SL03" }, type: "ev", year: "2025", price: "11.99万起",
+              tags: { zh: ["后驱","颜值","性价比"], zh_TW: ["後驅","顏值","性價比"], en: ["RWD","Stylish","Great value"] },
+              desc: { zh: "后驱纯电轿跑，无框车门+掀背尾门，颜值与操控兼具。", zh_TW: "後驅純電轎跑，無框車門+掀背尾門，顏值與操控兼具。", en: "RWD EV fastback, frameless doors + hatchback — style and handling in one." } },
+            { name: { zh: "丰田卡罗拉", zh_TW: "豐田卡羅拉", en: "Toyota Corolla" }, type: "fuel", year: "2024", price: "10.86万起",
+              tags: { zh: ["皮实耐用","保值","油耗低"], zh_TW: ["耐用","保值","油耗低"], en: ["Durable","Resale value","Low fuel"] },
+              desc: { zh: "全球销量王，1.2T 动力平顺，可靠性口碑极佳，保值率稳定。", zh_TW: "全球銷量王，1.2T 動力平順，可靠性口碑極佳，保值率穩定。", en: "World's best-seller, smooth 1.2T, legendary reliability, strong resale value." } },
+            { name: { zh: "日产轩逸", zh_TW: "日產軒逸", en: "Nissan Sylphy" }, type: "fuel", year: "2024", price: "10.86万起",
+              tags: { zh: ["大沙发","空间大","省油"], zh_TW: ["大沙發","空間大","省油"], en: ["Sofa seats","Spacious","Fuel-efficient"] },
+              desc: { zh: "座椅舒适度同价位无对手，后排空间宽裕，适合家庭出行。", zh_TW: "座椅舒適度同價位無對手，後排空間寬裕，適合家庭出行。", en: "Unbeatable seat comfort at this price, roomy rear — ideal for family trips." } },
+            { name: { zh: "大众朗逸", zh_TW: "福斯朗逸", en: "VW Lavida" }, type: "fuel", year: "2025", price: "12.09万起",
+              tags: { zh: ["德系质感","保有量大","维修方便"], zh_TW: ["德系質感","保有量大","維修方便"], en: ["German feel","Huge volume","Easy repair"] },
+              desc: { zh: "国民家轿，底盘扎实，配件到处能修，保值率稳定。", zh_TW: "國民家轎，底盤紮實，配件到處能修，保值率穩定。", en: "The people's sedan — solid chassis, parts everywhere, stable resale." } },
+            { name: { zh: "哈弗H6", zh_TW: "哈弗H6", en: "Haval H6" }, type: "fuel", year: "2024", price: "9.59万起",
+              tags: { zh: ["SUV销冠","空间大","配置高"], zh_TW: ["SUV銷冠","空間大","配置高"], en: ["SUV best-seller","Spacious","Well-equipped"] },
+              desc: { zh: "想花小钱买大空间 SUV，H6 是绕不开的选择，保有量大维修方便。", zh_TW: "想花小錢買大空間 SUV，H6 是繞不開的選擇，保有量大維修方便。", en: "For a big SUV on a budget, H6 is unmissable — huge volume, easy to maintain." } }
         ];
 
+        // ===== 语言切换 =====
+        let currentLang = localStorage.getItem('lang') || 'zh';
+        function setLang(lang) {
+            currentLang = lang;
+            localStorage.setItem('lang', lang);
+            applyLang();
+            renderList(currentFilter);
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+        }
+        function t(key) { return (i18n[currentLang] && i18n[currentLang][key]) || key; }
+        function applyLang() {
+            document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
+            const f = document.querySelector('footer p');
+            if (f) f.innerHTML = `<a href="about.html">${t('footer_about')}</a> | <a href="contact.html">${t('footer_contact')}</a> | <a href="privacy.html">${t('footer_privacy')}</a> | <a href="stats.html">${t('footer_stats')}</a>`;
+            const f2 = document.querySelectorAll('footer p')[1];
+            if (f2) f2.textContent = t('footer_copy');
+        }
+
+        let currentFilter = 'all';
         function renderList(filter) {
             const list = document.getElementById('rank-list');
             list.innerHTML = '';
             const data = filter === 'all' ? carList : carList.filter(c => c.type === filter);
             data.forEach((car, i) => {
-                const typeTag = `<span class="tag-${car.type}">${car.type === 'ev' ? '纯电' : car.type === 'phev' ? '插混' : '燃油'}</span>`;
-                const otherTags = car.tags.map(t => `<span class="tag-normal">${t}</span>`).join('');
+                const typeTag = `<span class="tag-${car.type}">${t('type_' + car.type)}</span>`;
+                const otherTags = car.tags[currentLang].map(tag => `<span class="tag-normal">${tag}</span>`).join('');
                 const card = document.createElement('div');
                 card.className = 'rank-card ' + car.type;
                 card.innerHTML = `
                     <div class="rank-no">${i + 1}</div>
                     <div class="rank-body">
-                        <h3>${car.name}</h3>
+                        <h3>${car.name[currentLang]}</h3>
                         <div class="rank-tags">${typeTag}${otherTags}</div>
-                        <div class="rank-price">参考价 ${car.price}</div>
-                        <p class="rank-desc">${car.year} | ${car.desc}</p>
+                        <div class="rank-price">${t('price_from')}${car.price}</div>
+                        <p class="rank-desc">${car.year} | ${car.desc[currentLang]}</p>
                     </div>
                 `;
                 list.appendChild(card);
@@ -247,26 +366,29 @@
         function filterList(type, btn) {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
+            currentFilter = type;
             renderList(type);
         }
 
         // 自推广广告
         const adPool = [
-            { text: "📊 想知道油车电车哪个更省？", link: "power.html", linkText: "试试油电成本计算器 →" },
-            { text: "💰 买车到底要花多少钱？", link: "price.html", linkText: "算一下落地价 →" },
-            { text: "⚡ 养车一年要花多少？", link: "cost.html", linkText: "算一下养车成本 →" },
-            { text: "📉 现在买车有多少优惠？", link: "deals.html", linkText: "查看降价行情 →" }
+            { text: "📊 想知道油车电车哪个更省？", link: "/power", linkText: "试试油电成本计算器 →" },
+            { text: "💰 买车到底要花多少钱？", link: "/price", linkText: "算一下落地价 →" },
+            { text: "⚡ 养车一年要花多少？", link: "/cost", linkText: "算一下养车成本 →" },
+            { text: "📉 现在买车有多少优惠？", link: "/deals", linkText: "查看降价行情 →" }
         ];
         function renderAd(id) {
             const el = document.getElementById(id);
             if (!el) return;
-            const path = window.location.pathname.split('/').pop() || 'index.html';
+            const path = window.location.pathname;
             const pool = adPool.filter(a => a.link !== path);
             const ad = pool[Math.floor(Math.random() * pool.length)];
             el.innerHTML = `<span class="ad-label">推荐</span><div>${ad.text} <a href="${ad.link}">${ad.linkText}</a></div>`;
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            applyLang();
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === currentLang));
             renderList('all');
             renderAd('self-ad-1');
         });
